@@ -1,0 +1,11 @@
+slug,name,type,address,latitude,longitude,contact,website,accreditation,hasEmergency,beds,bedsNote,keySpecialties,dataVerified,departments
+apollo-hospital-bannerghatta-road,"Apollo Hospital, Bannerghatta Road",PRIVATE,"154/11 Bannerghatta Main Road, Bangalore, Karnataka 560076, India",12.915,77.599,+91-80-68250000,https://www.apollohospitals.com/hospitals/apollo-hospitals-bannerghatta-road,"NABH|JCI",true,270,,"Cardiology|Oncology|Neurology|Orthopedics",true,"Cardiology|Oncology|Neurology|Orthopedics|Emergency"
+fortis-hospital-cunningham-road,"Fortis Hospital, Cunningham Road",PRIVATE,"14 Cunningham Road, Vasant Nagar, Bangalore 560052, India",12.96,77.595,+91-80-66126868,https://www.fortishealthcare.com/india/hospitals/fortis-hospital-bangalore,"NABH",true,180,,"Cardiology|Neurology|Orthopedics",true,"Cardiology|Nephrology|Neurology|Orthopedics|Emergency"
+hcg-cancer-center-bangalore,"HCG Cancer Center, Bangalore",PRIVATE,"No 8, HCG Towers, P. Kalinga Rao Road, Sampangi Ram Nagar, Bangalore 560020, India",12.987,77.578,+91-80-41433000,https://www.hcgoncology.com/oncology-hospitals/bangalore,"NABH",false,700,,"Oncology|Hematology",true,"Medical Oncology|Radiation Oncology|Surgical Oncology"
+fortis-hospital-bannerghatta,"Fortis Hospital, Bannerghatta",PRIVATE,,,,,,"NABH",true,300,,"ICU|Trauma",false,"ICU|Trauma"
+aster-rv-hospital,"Aster RV Hospital",PRIVATE,,,,,,"NABH",true,250,,"Cardiology|Neurology|Critical Care",false,"Cardiology|Neurology|Critical Care"
+bgs-gleneagles-global,"BGS Gleneagles Global",PRIVATE,,,,,,"NABH",true,490,,"Cardiology|Transplants|Radiology",false,"Cardiology|Transplants|Radiology"
+rainbow-childrens-hospital,"Rainbow Children's Hospital",PRIVATE,,,,,,"NABH",true,300,,"Pediatrics|Neonatology",false,"Pediatrics|Neonatology"
+hosmat-hospital-bangalore,"Hosmat Hospital, Bangalore",PRIVATE,,,,,,"NABH",true,650,,"Orthopedics|Spine|Joint Replacement",false,"Orthopedics|Spine|Joint Replacement"
+narayana-hrudayalaya-jnanabhumi,"Narayana Hrudayalaya, JnanaBhumi",PRIVATE,,,,,,"NABH|JCI",true,,"710 total Bangalore (figure inconsistent with ~1500 beds overall in Bangalore per source report)","Cardiology|Heart Surgery",false,"Cardiology|Heart Surgery"
+nimhans,"NIMHANS",GOVERNMENT,,,,,,"NABL (Labs)",true,420,"~420 beds per source report","Psychiatry|Neurosciences",false,"Psychiatry|Neurosciences"

@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: api-health
+    metrics_path: /health
+    static_configs:
+      - targets: ["api:4000"]
+    # NOTE: /health returns JSON, not Prometheus format. For real metrics,
+    # add prom-client to apps/api (GET /metrics) and switch metrics_path.
+    # This job is a blackbox liveness placeholder until then.
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files:
+  - /etc/prometheus/alerts.yml

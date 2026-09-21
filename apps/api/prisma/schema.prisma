@@ -1,0 +1,260 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  PATIENT
+  DOCTOR
+  ADMIN
+}
+
+enum HospitalType {
+  PRIVATE
+  GOVERNMENT
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum ConsentPurpose {
+  MEDICAL_CARE
+  APPOINTMENT_COMMUNICATIONS
+  INSURANCE
+  RESEARCH
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  role         Role
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  lastLoginAt  DateTime?
+
+  refreshTokens RefreshToken[]
+  consents      ConsentRecord[]
+  auditLogs     AuditLog[]     @relation("AuditActor")
+  doctor        Doctor?
+  patient       Patient?
+
+  @@index([role])
+}
+
+model RefreshToken {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash    String    @unique
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  replacedById String?
+  createdAt    DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Hospital {
+  id             String       @id @default(cuid())
+  slug           String       @unique
+  name           String
+  type           HospitalType
+  address        String?
+  latitude       Float?
+  longitude      Float?
+  contact        String?
+  website        String?
+  accreditation  String[]     @default([])
+  hasEmergency   Boolean      @default(false)
+  beds           Int?
+  bedsNote       String?
+  keySpecialties String[]     @default([])
+  dataVerified   Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  departments  Department[]
+  affiliations DoctorAffiliation[]
+
+  @@index([type])
+  @@index([hasEmergency])
+  @@index([dataVerified])
+}
+
+model Department {
+  id         String   @id @default(cuid())
+  hospitalId String
+  hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  name       String
+
+  affiliations DoctorAffiliation[]
+
+  @@unique([hospitalId, name])
+  @@index([hospitalId])
+}
+
+model Doctor {
+  id            String   @id @default(cuid())
+  userId        String?  @unique
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name          String
+  specialty     String
+  qualifications String
+  languages     String[] @default([])
+  contactEmail  String?
+  photoUrl      String?
+  isDemo        Boolean  @default(false)
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  affiliations DoctorAffiliation[]
+  timeOffs     TimeOff[]
+  appointments Appointment[]
+
+  @@index([specialty])
+  @@index([isDemo])
+}
+
+model DoctorAffiliation {
+  id              String   @id @default(cuid())
+  doctorId        String
+  doctor          Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  hospitalId      String
+  hospital        Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  departmentId    String?
+  department      Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  schedulePending Boolean  @default(false)
+
+  availabilityRules AvailabilityRule[]
+  appointments      Appointment[]
+
+  @@unique([doctorId, hospitalId])
+  @@index([hospitalId])
+  @@index([doctorId])
+}
+
+model AvailabilityRule {
+  id            String            @id @default(cuid())
+  affiliationId String
+  affiliation   DoctorAffiliation @relation(fields: [affiliationId], references: [id], onDelete: Cascade)
+  dayOfWeek     Int // 0=Sunday .. 6=Saturday
+  startTime     String // "HH:mm" IST
+  endTime       String // "HH:mm" IST
+  slotMinutes   Int    @default(20)
+
+  @@index([affiliationId, dayOfWeek])
+}
+
+model TimeOff {
+  id       String   @id @default(cuid())
+  doctorId String
+  doctor   Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  startsAt DateTime
+  endsAt   DateTime
+  reason   String?
+
+  @@index([doctorId, startsAt])
+}
+
+model Patient {
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name           String
+  phone          String
+  email          String
+  dateOfBirth    DateTime?
+  gender         String?
+  medicalNotesEnc String? // AES-256-GCM encrypted
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  appointments Appointment[]
+
+  @@index([email])
+}
+
+model Appointment {
+  id             String            @id @default(cuid())
+  patientId      String
+  patient        Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  doctorId       String
+  doctor         Doctor            @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  affiliationId  String
+  affiliation    DoctorAffiliation @relation(fields: [affiliationId], references: [id], onDelete: Restrict)
+  startsAt       DateTime
+  endsAt         DateTime
+  status         AppointmentStatus @default(PENDING)
+  reason         String?
+  cancelledBy    String?
+  cancelledAt    DateTime?
+  idempotencyKey String?           @unique
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  notifications NotificationLog[]
+
+  @@index([doctorId, startsAt])
+  @@index([patientId, startsAt])
+  @@index([affiliationId, startsAt])
+  @@index([status])
+  // NOTE: partial unique index to prevent double booking is added in migration SQL:
+  // CREATE UNIQUE INDEX appointment_no_double_booking ON "Appointment"("doctorId", "startsAt")
+  // WHERE status IN ('PENDING','CONFIRMED');
+}
+
+model ConsentRecord {
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purpose       ConsentPurpose
+  policyVersion String         @default("v1.0")
+  grantedAt     DateTime       @default(now())
+  withdrawnAt   DateTime?
+
+  @@unique([userId, purpose, policyVersion])
+  @@index([userId])
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  actor       User?    @relation("AuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
+  action      String
+  entityType  String
+  entityId    String
+  ip          String?
+  userAgent   String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([actorUserId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+model NotificationLog {
+  id                String   @id @default(cuid())
+  appointmentId     String?
+  appointment       Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  channel           String // EMAIL | SMS | CONSOLE
+  type              String // BOOKING_CONFIRMED | RESCHEDULED | CANCELLED | REMINDER_24H | REMINDER_2H | DOCTOR_NEW_BOOKING
+  status            String   @default("QUEUED") // QUEUED | SENT | FAILED
+  providerMessageId String?
+  createdAt         DateTime @default(now())
+
+  @@index([appointmentId])
+  @@index([status])
+}

@@ -1,0 +1,27 @@
+# deps
+node_modules/
+# builds
+dist/
+build/
+*.tsbuildinfo
+# env
+.env
+.env.local
+*.local
+# prisma
+*.db
+# vite
+apps/web/dist/
+# docker
+.docker/
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# logs
+*.log
+npm-debug.log*
+# playwright
+test-results/
+playwright-report/

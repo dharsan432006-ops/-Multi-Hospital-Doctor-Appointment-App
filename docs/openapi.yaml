@@ -1,0 +1,665 @@
+openapi: 3.0.0
+info:
+  title: Bangalore Hospital Appointment API
+  version: 1.0.0
+  description: >
+    Multi-hospital doctor appointment API (Bangalore, IST display / UTC storage).
+    AI helpers are powered by OpenRouter (see /api/ai/*). Auth: JWT access
+    (15m, Bearer) + rotating refresh in httpOnly cookie.
+servers:
+  - url: http://localhost:4000/api
+security:
+  - bearerAuth: []
+tags:
+  - name: Auth
+  - name: Hospitals
+  - name: Departments
+  - name: Doctors
+  - name: Patients
+  - name: Appointments
+  - name: Consents
+  - name: Admin
+  - name: AI (OpenRouter)
+  - name: Ops
+paths:
+  /health:
+    get:
+      tags: [Ops]
+      security: []
+      summary: Liveness/readiness (DB + Redis checks)
+      responses:
+        '200': { description: OK }
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Register as PATIENT (requires MEDICAL_CARE consent)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, phone, consents]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string, minLength: 8 }
+                phone: { type: string }
+                consents: { type: array, items: { type: string } }
+      responses:
+        '201': { description: Created }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Login (sets refresh cookie)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        '200': { description: OK }
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      security: []
+      summary: Rotate refresh token (cookie)
+      responses:
+        '200': { description: OK }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Logout (revokes refresh cookie)
+      responses:
+        '200': { description: OK }
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Current user
+      responses:
+        '200': { description: OK }
+
+  /hospitals:
+    get:
+      tags: [Hospitals]
+      security: []
+      summary: List hospitals (q, accreditation, emergency, type, pagination)
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: accreditation, in: query, schema: { type: string } }
+        - { name: emergency, in: query, schema: { type: string, enum: ['true', 'false'] } }
+        - { name: type, in: query, schema: { type: string, enum: [PRIVATE, GOVERNMENT] } }
+        - { name: page, in: query, schema: { type: integer } }
+        - { name: pageSize, in: query, schema: { type: integer } }
+      responses:
+        '200':
+          description: Hospital list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { type: array, items: { $ref: '#/components/schemas/Hospital' } }
+    post:
+      tags: [Hospitals]
+      summary: Create hospital (ADMIN)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/HospitalInput' }
+      responses:
+        '201': { description: Created }
+
+  /hospitals/{id}:
+    get:
+      tags: [Hospitals]
+      security: []
+      summary: Hospital detail
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+        '404': { description: Not found }
+    put:
+      tags: [Hospitals]
+      summary: Update hospital (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/HospitalInput' }
+      responses:
+        '200': { description: OK }
+    delete:
+      tags: [Hospitals]
+      summary: Delete hospital (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /departments:
+    get:
+      tags: [Departments]
+      security: []
+      summary: List departments (filter hospitalId)
+      parameters:
+        - { name: hospitalId, in: query, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+    post:
+      tags: [Departments]
+      summary: Create department (ADMIN)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hospitalId, name]
+              properties:
+                hospitalId: { type: string }
+                name: { type: string }
+      responses:
+        '201': { description: Created }
+
+  /departments/{id}:
+    put:
+      tags: [Departments]
+      summary: Rename department (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+      responses:
+        '200': { description: OK }
+    delete:
+      tags: [Departments]
+      summary: Delete department (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /doctors:
+    get:
+      tags: [Doctors]
+      security: []
+      summary: Search doctors (specialty, hospital, department, language, q)
+      parameters:
+        - { name: specialty, in: query, schema: { type: string } }
+        - { name: hospital, in: query, schema: { type: string } }
+        - { name: department, in: query, schema: { type: string } }
+        - { name: language, in: query, schema: { type: string } }
+        - { name: q, in: query, schema: { type: string } }
+        - { name: page, in: query, schema: { type: integer } }
+        - { name: pageSize, in: query, schema: { type: integer } }
+      responses:
+        '200': { description: OK }
+    post:
+      tags: [Doctors]
+      summary: Create doctor (ADMIN)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DoctorInput' }
+      responses:
+        '201': { description: Created }
+
+  /doctors/me/availability:
+    get:
+      tags: [Doctors]
+      summary: Own availability rules (DOCTOR)
+      responses:
+        '200': { description: OK }
+    put:
+      tags: [Doctors]
+      summary: Replace availability rules for one affiliation (DOCTOR)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hospitalId, rules]
+              properties:
+                hospitalId: { type: string }
+                rules:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      dayOfWeek: { type: integer, minimum: 0, maximum: 6 }
+                      startTime: { type: string, example: '10:00' }
+                      endTime: { type: string, example: '16:00' }
+                      slotMinutes: { type: integer, default: 20 }
+      responses:
+        '200': { description: OK }
+
+  /doctors/me/time-off:
+    get:
+      tags: [Doctors]
+      summary: List own time-off (DOCTOR)
+      responses:
+        '200': { description: OK }
+    post:
+      tags: [Doctors]
+      summary: Block time-off (DOCTOR)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [startsAt, endsAt]
+              properties:
+                startsAt: { type: string, format: date-time }
+                endsAt: { type: string, format: date-time }
+                reason: { type: string }
+      responses:
+        '201': { description: Created }
+
+  /doctors/me/time-off/{id}:
+    delete:
+      tags: [Doctors]
+      summary: Remove time-off (DOCTOR)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /doctors/{id}:
+    get:
+      tags: [Doctors]
+      security: []
+      summary: Doctor detail
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+    put:
+      tags: [Doctors]
+      summary: Update doctor (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/DoctorInput' }
+      responses:
+        '200': { description: OK }
+    delete:
+      tags: [Doctors]
+      summary: Delete doctor (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /doctors/{id}/availability:
+    get:
+      tags: [Doctors]
+      security: []
+      summary: Bookable slots (next 30 days, IST hours)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: hospitalId, in: query, schema: { type: string } }
+        - { name: from, in: query, schema: { type: string, format: date-time } }
+        - { name: to, in: query, schema: { type: string, format: date-time } }
+      responses:
+        '200': { description: OK }
+
+  /doctors/{id}/affiliations:
+    post:
+      tags: [Doctors]
+      summary: Add/update affiliation (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hospitalId, departmentName]
+              properties:
+                hospitalId: { type: string }
+                departmentName: { type: string }
+      responses:
+        '201': { description: Created }
+
+  /doctors/{id}/affiliations/{affId}:
+    delete:
+      tags: [Doctors]
+      summary: Remove affiliation (ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: affId, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /patients/me:
+    get:
+      tags: [Patients]
+      summary: Own patient profile (medical notes decrypted)
+      responses:
+        '200': { description: OK }
+    put:
+      tags: [Patients]
+      summary: Update own profile (notes encrypted with AES-256-GCM)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                phone: { type: string }
+                dateOfBirth: { type: string, format: date-time, nullable: true }
+                gender: { type: string, nullable: true }
+                medicalNotes: { type: string, nullable: true }
+      responses:
+        '200': { description: OK }
+
+  /patients/{id}:
+    get:
+      tags: [Patients]
+      summary: Patient detail (ADMIN, audited, masked by default)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: masked, in: query, schema: { type: string, default: 'true' } }
+      responses:
+        '200': { description: OK }
+
+  /appointments:
+    post:
+      tags: [Appointments]
+      summary: Book appointment (PATIENT, idempotent)
+      parameters:
+        - { name: Idempotency-Key, in: header, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [doctorId, startsAt]
+              properties:
+                doctorId: { type: string }
+                hospitalId: { type: string }
+                affiliationId: { type: string }
+                startsAt: { type: string, format: date-time }
+                reason: { type: string }
+                idempotencyKey: { type: string }
+      responses:
+        '201': { description: Created }
+        '409': { description: Slot taken }
+    get:
+      tags: [Appointments]
+      summary: List appointments (scoped by role)
+      parameters:
+        - { name: status, in: query, schema: { type: string } }
+        - { name: hospitalId, in: query, schema: { type: string } }
+        - { name: doctorId, in: query, schema: { type: string } }
+        - { name: patientId, in: query, schema: { type: string } }
+        - { name: from, in: query, schema: { type: string } }
+        - { name: to, in: query, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /appointments/{id}:
+    get:
+      tags: [Appointments]
+      summary: Appointment detail (object-level auth)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /appointments/{id}/cancel:
+    patch:
+      tags: [Appointments]
+      summary: Cancel (cutoff 2h for patients)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /appointments/{id}/reschedule:
+    patch:
+      tags: [Appointments]
+      summary: Reschedule to a new valid slot
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [startsAt]
+              properties:
+                startsAt: { type: string, format: date-time }
+      responses:
+        '200': { description: OK }
+
+  /appointments/{id}/status:
+    patch:
+      tags: [Appointments]
+      summary: Set status (DOCTOR/ADMIN)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [PENDING, CONFIRMED, CANCELLED, COMPLETED, NO_SHOW] }
+      responses:
+        '200': { description: OK }
+
+  /consents:
+    get:
+      tags: [Consents]
+      summary: Own consents
+      responses:
+        '200': { description: OK }
+    post:
+      tags: [Consents]
+      summary: Grant consent purpose
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [purpose]
+              properties:
+                purpose: { type: string, enum: [MEDICAL_CARE, APPOINTMENT_COMMUNICATIONS, INSURANCE, RESEARCH] }
+                policyVersion: { type: string, default: v1.0 }
+      responses:
+        '201': { description: Created }
+
+  /consents/{purpose}:
+    delete:
+      tags: [Consents]
+      summary: Withdraw consent purpose
+      parameters:
+        - { name: purpose, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: OK }
+
+  /admin/reports/bookings:
+    get:
+      tags: [Admin]
+      summary: Booking report (JSON or CSV)
+      parameters:
+        - { name: from, in: query, schema: { type: string } }
+        - { name: to, in: query, schema: { type: string } }
+        - { name: hospitalId, in: query, schema: { type: string } }
+        - { name: specialty, in: query, schema: { type: string } }
+        - { name: format, in: query, schema: { type: string, enum: [json, csv], default: json } }
+      responses:
+        '200': { description: OK }
+
+  /admin/users:
+    get:
+      tags: [Admin]
+      summary: List users (masked)
+      responses:
+        '200': { description: OK }
+
+  /admin/users/{id}/role:
+    patch:
+      tags: [Admin]
+      summary: Change user role
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [role]
+              properties:
+                role: { type: string, enum: [PATIENT, DOCTOR, ADMIN] }
+      responses:
+        '200': { description: OK }
+
+  /admin/audit-logs:
+    get:
+      tags: [Admin]
+      summary: Audit log viewer
+      responses:
+        '200': { description: OK }
+
+  /ai/status:
+    get:
+      tags: [AI (OpenRouter)]
+      security: []
+      summary: AI provider status (enabled/model)
+      responses:
+        '200': { description: OK }
+
+  /ai/symptom-guide:
+    post:
+      tags: [AI (OpenRouter)]
+      security: []
+      summary: Symptom-to-specialty guidance (general info only, not a diagnosis)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [symptoms]
+              properties:
+                symptoms: { type: string, maxLength: 2000 }
+                language: { type: string }
+      responses:
+        '200': { description: OK }
+        '503': { description: AI disabled (no OPENROUTER_API_KEY) }
+
+  /ai/booking-help:
+    post:
+      tags: [AI (OpenRouter)]
+      security: []
+      summary: Natural-language to doctor-search filters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query: { type: string, maxLength: 2000 }
+      responses:
+        '200': { description: OK }
+        '503': { description: AI disabled }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Hospital:
+      type: object
+      properties:
+        id: { type: string, example: '1' }
+        slug: { type: string, example: apollo-hospital-bannerghatta-road }
+        name: { type: string, example: 'Apollo Hospital, Bannerghatta Road' }
+        address: { type: string, example: '154/11 Bannerghatta Main Road, Bangalore, Karnataka 560076, India' }
+        contact: { type: string, example: '+91-80-68250000' }
+        accreditation: { type: array, items: { type: string }, example: [NABH, JCI] }
+        hasEmergency: { type: boolean }
+        beds: { type: integer, nullable: true }
+        dataVerified: { type: boolean }
+    HospitalInput:
+      type: object
+      required: [name, type]
+      properties:
+        name: { type: string }
+        type: { type: string, enum: [PRIVATE, GOVERNMENT] }
+        address: { type: string, nullable: true }
+        latitude: { type: number, nullable: true }
+        longitude: { type: number, nullable: true }
+        contact: { type: string, nullable: true }
+        website: { type: string, nullable: true }
+        accreditation: { type: array, items: { type: string } }
+        hasEmergency: { type: boolean }
+        beds: { type: integer, nullable: true }
+        bedsNote: { type: string, nullable: true }
+        keySpecialties: { type: array, items: { type: string } }
+        dataVerified: { type: boolean }
+        departments: { type: array, items: { type: string } }
+    DoctorInput:
+      type: object
+      required: [name, specialty, qualifications]
+      properties:
+        name: { type: string }
+        specialty: { type: string }
+        qualifications: { type: string }
+        languages: { type: array, items: { type: string } }
+        contactEmail: { type: string, nullable: true }
+        photoUrl: { type: string, nullable: true }
+        isVerified: { type: boolean }
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            details: { type: object }

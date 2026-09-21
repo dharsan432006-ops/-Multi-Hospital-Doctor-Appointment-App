@@ -1,0 +1,24 @@
+{
+  "title": "Hospital Appointments — Overview",
+  "tags": ["appointments", "phase-4"],
+  "timezone": "Asia/Kolkata",
+  "panels": [
+    {
+      "title": "API up",
+      "type": "stat",
+      "targets": [{ "expr": "up{job=\"api-health\"}" }]
+    },
+    {
+      "title": "ALB 5xx (CloudWatch)",
+      "type": "timeseries",
+      "description": "Wire CloudWatch datasource: AWS/ApplicationELB HTTPCode_Target_5XX_Count per TargetGroup.",
+      "targets": [{ "expr": "increase(http_5xx_total[5m])" }]
+    },
+    {
+      "title": "Bookings per day (app-level)",
+      "type": "timeseries",
+      "description": "Requires /metrics counter appointments_created_total{status,hospital}. Placeholder until prom-client is added.",
+      "targets": [{ "expr": "increase(appointments_created_total[1d])" }]
+    }
+  ]
+}

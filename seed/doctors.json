@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Dr. Priya Kapoor",
+    "specialty": "Cardiology",
+    "qualifications": "MD, DM (Cardiology)",
+    "department": "Cardiology",
+    "languages": ["English", "Hindi"],
+    "contactEmail": "priya.kapoor@apollohospitals.com",
+    "photoUrl": "https://www.apollohospitals.com/doctors/priyakapoor.jpg",
+    "isDemo": true,
+    "isVerified": false,
+    "demoLoginEmail": "priya.kapoor@example.test",
+    "affiliations": [
+      {
+        "hospitalSlug": "apollo-hospital-bannerghatta-road",
+        "schedulePending": false,
+        "availabilityRules": [
+          { "dayOfWeek": 1, "startTime": "10:00", "endTime": "16:00", "slotMinutes": 20 },
+          { "dayOfWeek": 2, "startTime": "10:00", "endTime": "16:00", "slotMinutes": 20 },
+          { "dayOfWeek": 3, "startTime": "10:00", "endTime": "16:00", "slotMinutes": 20 },
+          { "dayOfWeek": 4, "startTime": "10:00", "endTime": "16:00", "slotMinutes": 20 },
+          { "dayOfWeek": 5, "startTime": "10:00", "endTime": "16:00", "slotMinutes": 20 }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dr. Rajesh Malhotra",
+    "specialty": "Oncology",
+    "qualifications": "MBBS, MD (Oncology)",
+    "department": "Medical Oncology",
+    "languages": ["English", "Kannada"],
+    "contactEmail": "rajesh.malhotra@hcgoncology.com",
+    "photoUrl": "https://www.hcgoncology.com/doctors/rajeshmalhotra.jpg",
+    "isDemo": true,
+    "isVerified": false,
+    "demoLoginEmail": "rajesh.malhotra@example.test",
+    "affiliations": [
+      {
+        "hospitalSlug": "apollo-hospital-bannerghatta-road",
+        "schedulePending": false,
+        "availabilityRules": [
+          { "dayOfWeek": 2, "startTime": "11:00", "endTime": "17:00", "slotMinutes": 20 },
+          { "dayOfWeek": 3, "startTime": "11:00", "endTime": "17:00", "slotMinutes": 20 },
+          { "dayOfWeek": 4, "startTime": "11:00", "endTime": "17:00", "slotMinutes": 20 },
+          { "dayOfWeek": 5, "startTime": "11:00", "endTime": "17:00", "slotMinutes": 20 },
+          { "dayOfWeek": 6, "startTime": "11:00", "endTime": "17:00", "slotMinutes": 20 }
+        ]
+      },
+      {
+        "hospitalSlug": "hcg-cancer-center-bangalore",
+        "schedulePending": true,
+        "availabilityRules": []
+      }
+    ]
+  },
+  {
+    "name": "Dr. Anita Desai",
+    "specialty": "Orthopedics",
+    "qualifications": "MS, DNB (Ortho)",
+    "department": "Orthopedics",
+    "languages": ["English", "Hindi"],
+    "contactEmail": "anita.desai@hosmathospitals.com",
+    "photoUrl": "https://www.hosmathospitals.com/doctors/anitadesai.jpg",
+    "isDemo": true,
+    "isVerified": false,
+    "demoLoginEmail": "anita.desai@example.test",
+    "affiliations": [
+      {
+        "hospitalSlug": "hosmat-hospital-bangalore",
+        "schedulePending": false,
+        "availabilityRules": [
+          { "dayOfWeek": 1, "startTime": "09:00", "endTime": "15:00", "slotMinutes": 20 },
+          { "dayOfWeek": 2, "startTime": "09:00", "endTime": "15:00", "slotMinutes": 20 },
+          { "dayOfWeek": 3, "startTime": "09:00", "endTime": "15:00", "slotMinutes": 20 },
+          { "dayOfWeek": 4, "startTime": "09:00", "endTime": "15:00", "slotMinutes": 20 },
+          { "dayOfWeek": 5, "startTime": "09:00", "endTime": "15:00", "slotMinutes": 20 }
+        ]
+      }
+    ]
+  }
+]

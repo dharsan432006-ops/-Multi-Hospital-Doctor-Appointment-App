@@ -1,0 +1,18 @@
+groups:
+  - name: appointments
+    interval: 1m
+    rules:
+      - alert: ApiDown
+        expr: up{job="api-health"} == 0
+        for: 2m
+        labels: { severity: critical }
+        annotations:
+          summary: "Appointment API is down"
+          description: "No successful /health scrape for 2m. Check ECS service, RDS, Redis."
+      - alert: ApiHigh5xx
+        expr: increase(http_5xx_total[5m]) > 10
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "Elevated API 5xx rate"
+          description: "Requires prom-client /metrics in apps/api; placeholder until then."
