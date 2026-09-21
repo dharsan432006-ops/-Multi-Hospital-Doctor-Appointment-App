@@ -49,7 +49,7 @@ resource "aws_lb_listener" "http" {
 resource "aws_iam_role" "exec" {
   name = "${local.name}-ecs-exec"
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [{ Effect = "Allow", Principal = { Service = "ecs-tasks.amazonaws.com" }, Action = "sts:AssumeRole" }]
   })
 }
@@ -80,9 +80,9 @@ resource "aws_ecs_task_definition" "api" {
   execution_role_arn       = aws_iam_role.exec.arn
   task_role_arn            = aws_iam_role.exec.arn
   container_definitions = jsonencode([{
-    name      = "api"
-    image     = var.api_image
-    essential = true
+    name         = "api"
+    image        = var.api_image
+    essential    = true
     portMappings = [{ containerPort = var.api_port, hostPort = var.api_port }]
     environment = [
       { name = "NODE_ENV", value = "production" },
