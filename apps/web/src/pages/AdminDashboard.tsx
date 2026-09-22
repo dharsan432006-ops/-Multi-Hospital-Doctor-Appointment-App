@@ -3,9 +3,9 @@ import { Alert, Box, Button, Card, CardContent, MenuItem, Stack, Tab, Tabs, Text
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { apiFetch, apiFetchPage, getAccessToken } from '../api/client.js';
+import { apiFetch, apiFetchPage } from '../api/client.js';
 import { UnverifiedBadge, DemoBadge } from '../components/Badges.js';
-import { Empty, Loading } from '../components/States.js';
+import { Empty, Loading, LoadError } from '../components/States.js';
 import type { Doctor, Hospital } from '../api/types.js';
 
 interface Report { total: number; byDay: Record<string, number>; byStatus: Record<string, number>; byHospital: Record<string, number>; bySpecialty: Record<string, number> }
@@ -37,26 +37,59 @@ export function AdminDashboard() {
   };
 
   const toggleVerify = async (h: Hospital) => {
-    await apiFetch(`/hospitals/${h.id}`, { method: 'PUT', body: JSON.stringify({ dataVerified: !h.dataVerified }) });
-    qc.invalidateQueries({ queryKey: ['adminHosp'] });
+    try {
+      setMsg('');
+      await apiFetch(`/hospitals/${h.id}`, { method: 'PUT', body: JSON.stringify({ dataVerified: !h.dataVerified }) });
+      qc.invalidateQueries({ queryKey: ['adminHosp'] });
+    } catch (e) { setMsg(e instanceof Error ? e.message : 'Failed'); }
   };
 
   const setRole = useMutation({
     mutationFn: (v: { id: string; role: string }) => apiFetch(`/admin/users/${v.id}/role`, { method: 'PATCH', body: JSON.stringify({ role: v.role }) }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['adminUsers'] }),
+    onSuccess: () => { setMsg(''); qc.invalidateQueries({ queryKey: ['adminUsers'] }); },
+    onError: (e) => setMsg(e instanceof Error ? e.message : 'Role change failed'),
   });
 
+  const [csvPending, setCsvPending] = useState(false);
   const downloadCsv = async () => {
-    const res = await fetch(`${(import.meta.env.VITE_API_URL as string | undefined) ?? '/api'}/admin/reports/bookings?format=csv`, {
-      headers: { Authorization: `Bearer ${getAccessToken() ?? ''}` },
-      credentials: 'include',
-    });
-    if (!res.ok) { setMsg(`CSV export failed (${res.status})`); return; }
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'bookings.csv'; a.click();
-    URL.revokeObjectURL(url);
+    if (csvPending) return;
+    setCsvPending(true);
+    setMsg('');
+    try {
+      // Same auth flow as apiFetch (Bearer + httpOnly refresh cookie), requesting a blob.
+      const doFetch = async (): Promise<Response> => {
+        const { getAccessToken } = await import('../api/client.js');
+        const base = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+        return fetch(`${base}/admin/reports/bookings?format=csv&pageSize=200`, {
+          headers: { Authorization: `Bearer ${getAccessToken() ?? ''}` },
+          credentials: 'include',
+        });
+      };
+      let res = await doFetch();
+      if (res.status === 401) {
+        const base = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+        const r = await fetch(`${base}/auth/refresh`, { method: 'POST', credentials: 'include' });
+        if (r.ok) {
+          const j = (await r.json()) as { data?: { accessToken?: string } };
+          const { setAccessToken } = await import('../api/client.js');
+          if (j?.data?.accessToken) setAccessToken(j.data.accessToken);
+          res = await doFetch();
+        }
+      }
+      if (!res.ok) { setMsg(`CSV export failed (${res.status})`); return; }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'bookings.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : 'CSV export failed');
+    } finally {
+      setCsvPending(false);
+    }
   };
 
   const dayData = Object.entries(report.data?.byDay ?? {}).map(([day, bookings]) => ({ day, bookings }));
@@ -80,7 +113,8 @@ export function AdminDashboard() {
             <Button variant="contained" disabled={!hName} onClick={() => void createHospital()}>Add</Button>
           </Stack>
           {hospitals.isLoading && <Loading />}
-          {(hospitals.data?.data.length ?? 0) === 0 && !hospitals.isLoading && <Empty />}
+          {hospitals.isError && <LoadError message="Failed to load hospitals" onRetry={() => void hospitals.refetch()} />}
+          {(hospitals.data?.data.length ?? 0) === 0 && !hospitals.isLoading && !hospitals.isError && <Empty />}
           <Stack spacing={1}>
             {hospitals.data?.data.map((h) => (
               <Card key={h.id}><CardContent>
@@ -98,6 +132,8 @@ export function AdminDashboard() {
       {tab === 1 && (
         <Box>
           {doctors.isLoading && <Loading />}
+          {doctors.isError && <LoadError message="Failed to load doctors" onRetry={() => void doctors.refetch()} />}
+          {(doctors.data?.data.length ?? 0) === 0 && !doctors.isLoading && !doctors.isError && <Empty />}
           <Stack spacing={1}>
             {doctors.data?.data.map((d) => (
               <Card key={d.id}><CardContent>
@@ -114,6 +150,7 @@ export function AdminDashboard() {
       {tab === 2 && (
         <Box>
           {report.isLoading && <Loading />}
+          {report.isError && <LoadError message="Failed to load report" onRetry={() => void report.refetch()} />}
           {report.data && (
             <>
               <Typography>Total: {report.data.total} · Cancelled/No-show tracked in byStatus</Typography>
@@ -129,7 +166,7 @@ export function AdminDashboard() {
               {Object.entries(report.data.byHospital).map(([h, c]) => <Typography key={h} variant="body2">{h}: {c}</Typography>)}
               <Typography variant="h6" sx={{ mt: 2 }}>{t('admin.bySpecialty')}</Typography>
               {Object.entries(report.data.bySpecialty).map(([s, c]) => <Typography key={s} variant="body2">{s}: {c}</Typography>)}
-              <Button sx={{ mt: 2 }} variant="outlined" onClick={() => void downloadCsv()}>{t('admin.exportCsv')}</Button>
+              <Button sx={{ mt: 2 }} variant="outlined" disabled={csvPending} onClick={() => void downloadCsv()}>{csvPending ? t('common.loading') : t('admin.exportCsv')}</Button>
             </>
           )}
         </Box>
@@ -138,6 +175,8 @@ export function AdminDashboard() {
       {tab === 3 && (
         <Stack spacing={1}>
           {users.isLoading && <Loading />}
+          {users.isError && <LoadError message="Failed to load users" onRetry={() => void users.refetch()} />}
+          {setRole.isError && <Alert severity="error">{setRole.error instanceof Error ? setRole.error.message : 'Role change failed'}</Alert>}
           {users.data?.data.map((u) => (
             <Card key={u.id}><CardContent>
               <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
@@ -154,6 +193,8 @@ export function AdminDashboard() {
       {tab === 4 && (
         <Stack spacing={1}>
           {audits.isLoading && <Loading />}
+          {audits.isError && <LoadError message="Failed to load audit log" onRetry={() => void audits.refetch()} />}
+          {(audits.data?.data.length ?? 0) === 0 && !audits.isLoading && !audits.isError && <Empty />}
           {audits.data?.data.map((a) => (
             <Typography key={a.id} variant="body2">{a.createdAt} · {a.action} · {a.entityType}/{a.entityId}</Typography>
           ))}

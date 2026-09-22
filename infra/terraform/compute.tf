@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "api" {
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
   health_check {
-    path                = "/health"
+    path                = "/api/health"
     matcher             = "200"
     interval            = 30
     timeout             = 5
@@ -40,10 +40,25 @@ resource "aws_lb_listener" "http" {
   port              = 80
   protocol          = "HTTP"
   default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.api.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = var.acm_certificate_arn
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.api.arn
   }
-  # Production: add an HTTPS listener with ACM cert and redirect :80 -> :443.
 }
 
 resource "aws_iam_role" "exec" {
@@ -105,7 +120,7 @@ resource "aws_ecs_task_definition" "api" {
       }
     }
     healthCheck = {
-      command     = ["CMD-SHELL", "wget -qO- http://127.0.0.1:${var.api_port}/health | grep -q ok"]
+      command     = ["CMD-SHELL", "wget -qO- http://127.0.0.1:${var.api_port}/api/health | grep -q ok"]
       interval    = 30
       timeout     = 5
       retries     = 3
@@ -130,7 +145,7 @@ resource "aws_ecs_service" "api" {
     container_name   = "api"
     container_port   = var.api_port
   }
-  depends_on = [aws_lb_listener.http]
+  depends_on = [aws_lb_listener.http, aws_lb_listener.https]
 }
 
 # --- Frontend: S3 + CloudFront (values wired via CI build arg VITE_API_URL) ---

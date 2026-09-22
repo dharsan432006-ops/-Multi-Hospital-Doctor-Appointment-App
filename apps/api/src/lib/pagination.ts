@@ -1,9 +1,14 @@
-export function parsePagination(query: {
-  page?: unknown;
-  pageSize?: unknown;
-}) {
+export function parsePagination(
+  query: {
+    page?: unknown;
+    pageSize?: unknown;
+  },
+  defaultSize = 20,
+  maxSize = 100
+) {
   const page = Math.max(1, Number(query.page ?? 1) || 1);
-  const pageSize = Math.min(100, Math.max(1, Number(query.pageSize ?? 20) || 20));
+  const rawSize = Number(query.pageSize ?? defaultSize) || defaultSize;
+  const pageSize = Math.min(maxSize, Math.max(1, rawSize));
   return { page, pageSize, skip: (page - 1) * pageSize, take: pageSize };
 }
 

@@ -33,7 +33,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </>
           )}
           <FormControl size="small" sx={{ minWidth: 120 }}>
-            <Select value={i18n.language} onChange={(e) => void i18n.changeLanguage(e.target.value)} sx={{ color: 'white', '.MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,.4)' } }}>
+            <Select
+              value={i18n.language}
+              onChange={(e) => void i18n.changeLanguage(e.target.value)}
+              sx={{ color: 'white', '.MuiOutlinedInput-notchedOutline': { borderColor: 'rgba(255,255,255,.4)' } }}
+              inputProps={{ 'aria-label': t('common.language') }}
+            >
               {LANGUAGES.map((l) => <MenuItem key={l.code} value={l.code}>{l.label}</MenuItem>)}
             </Select>
           </FormControl>

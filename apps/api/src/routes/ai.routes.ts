@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { z } from 'zod';
+import { authenticate } from '../middleware/auth.js';
 import { aiLimiter } from '../middleware/rateLimit.js';
 import { validateBody } from '../middleware/validate.js';
 import { getConfig } from '../config/config.js';
@@ -20,6 +21,7 @@ router.get('/status', (_req, res) => {
 
 router.post(
   '/symptom-guide',
+  authenticate,
   aiLimiter,
   validateBody(z.object({ symptoms: z.string().min(3).max(2000), language: z.string().max(20).optional() })),
   async (req, res, next) => {
@@ -34,6 +36,7 @@ router.post(
 
 router.post(
   '/booking-help',
+  authenticate,
   aiLimiter,
   validateBody(z.object({ query: z.string().min(3).max(2000) })),
   async (req, res, next) => {

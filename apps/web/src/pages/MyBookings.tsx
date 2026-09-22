@@ -18,12 +18,17 @@ export function MyBookings() {
   const [picked, setPicked] = useState<Slot | null>(null);
   const [msg, setMsg] = useState('');
 
-  const { data: slots } = useAvailability(resched?.doctorId, resched?.affiliation ? undefined : undefined);
+  const { data: slots, isLoading: slotsLoading, isError: slotsError, refetch: refetchSlots } = useAvailability(
+    resched?.doctorId,
+    resched?.affiliation?.hospital.id
+  );
 
   if (isLoading) return <Loading />;
   if (isError) return <LoadError message="Failed to load" onRetry={() => void refetch()} />;
 
   const doCancel = async () => {
+    if (cancel.isPending) return;
+    setMsg('');
     try {
       await cancel.mutateAsync(confirmId);
       setMsg(t('booking.cancelled'));
@@ -34,7 +39,8 @@ export function MyBookings() {
   };
 
   const doReschedule = async () => {
-    if (!resched || !picked) return;
+    if (!resched || !picked || reschedule.isPending) return;
+    setMsg('');
     try {
       await reschedule.mutateAsync({ id: resched.id, startsAt: picked.startsAt });
       setMsg('Rescheduled');
@@ -57,11 +63,11 @@ export function MyBookings() {
               <Typography variant="h6">{a.doctor?.name} · {a.doctor?.specialty}</Typography>
               <Typography>{a.affiliation?.hospital.name}</Typography>
               <Typography>IST: {formatIST(a.startsAt)} – {formatIST(a.endsAt, { hour: '2-digit', minute: '2-digit', hour12: true })}</Typography>
-              <Typography variant="body2" color="text.secondary">Status: {a.status}</Typography>
+              <Typography variant="body2" color="text.secondary">{t('booking.statusLabel', { defaultValue: 'Status' })}: {a.status}</Typography>
               {['PENDING', 'CONFIRMED'].includes(a.status) && (
                 <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                  <Button size="small" color="error" onClick={() => setConfirmId(a.id)}>Cancel</Button>
-                  <Button size="small" onClick={() => { setResched(a); setPicked(null); }}>{t('booking.reschedule')}</Button>
+                  <Button size="small" color="error" onClick={() => { setMsg(''); setConfirmId(a.id); }}>{t('common.cancel')}</Button>
+                  <Button size="small" onClick={() => { setMsg(''); setResched(a); setPicked(null); }}>{t('booking.reschedule')}</Button>
                 </Stack>
               )}
             </CardContent>
@@ -71,17 +77,19 @@ export function MyBookings() {
       <Dialog open={!!confirmId} onClose={() => setConfirmId('')}>
         <DialogTitle>{t('booking.cancelTitle')}</DialogTitle>
         <DialogActions>
-          <Button onClick={() => setConfirmId('')}>{t('common.cancel')}</Button>
-          <Button color="error" onClick={() => void doCancel()}>{t('booking.cancelOk')}</Button>
+          <Button onClick={() => setConfirmId('')} disabled={cancel.isPending}>{t('common.cancel')}</Button>
+          <Button color="error" disabled={cancel.isPending} onClick={() => void doCancel()}>{cancel.isPending ? t('common.loading') : t('booking.cancelOk')}</Button>
         </DialogActions>
       </Dialog>
       <Dialog open={!!resched} onClose={() => setResched(null)} maxWidth="md" fullWidth>
         <DialogTitle>{t('booking.reschedule')}</DialogTitle>
         <Box sx={{ p: 2 }}>
-          <SlotPicker slots={slots ?? []} picked={picked} onPick={setPicked} />
+          {slotsLoading && <Loading />}
+          {slotsError && <LoadError message="Failed to load slots" onRetry={() => void refetchSlots()} />}
+          {!slotsLoading && !slotsError && <SlotPicker slots={slots ?? []} picked={picked} onPick={setPicked} />}
           <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
             <Button onClick={() => setResched(null)}>{t('common.cancel')}</Button>
-            <Button variant="contained" disabled={!picked} onClick={() => void doReschedule()}>{t('booking.reschedule')}</Button>
+            <Button variant="contained" disabled={!picked || reschedule.isPending} onClick={() => void doReschedule()}>{reschedule.isPending ? t('common.loading') : t('booking.reschedule')}</Button>
           </Stack>
         </Box>
       </Dialog>

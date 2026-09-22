@@ -22,7 +22,8 @@ router.get('/me', authenticate, requireRole('PATIENT', 'ADMIN'), async (req, res
       return;
     }
     const p = await myPatient(req.user!.id);
-    const out = { ...p, medicalNotes: p.medicalNotesEnc ? decryptText(p.medicalNotesEnc) : null };
+    const { medicalNotesEnc: _enc, ...rest } = p;
+    const out = { ...rest, medicalNotes: p.medicalNotesEnc ? decryptText(p.medicalNotesEnc) : null };
     res.json({ data: out });
   } catch (e) {
     next(e);
@@ -59,7 +60,8 @@ router.put('/me', authenticate, requireRole('PATIENT'), validateBody(UpdateMe), 
   }
 });
 
-// Admin read (audited, masked by default via query param)
+// Admin read (audited, masked by default via query param).
+// medicalNotesEnc is NEVER returned; decrypted notes only on explicit masked=false.
 router.get('/:id', authenticate, requireRole('ADMIN'), async (req, res, next) => {
   try {
     const p = await prisma.patient.findUnique({ where: { id: req.params.id } });
@@ -71,13 +73,23 @@ router.get('/:id', authenticate, requireRole('ADMIN'), async (req, res, next) =>
       entityType: 'Patient',
       entityId: p.id,
       req,
-      metadata: { email: maskEmail(p.email), phone: maskPhone(p.phone) },
+      metadata: { email: maskEmail(p.email), phone: maskPhone(p.phone), masked },
     });
-    res.json({
-      data: masked
-        ? { ...p, email: maskEmail(p.email), phone: maskPhone(p.phone), medicalNotesEnc: undefined }
-        : p,
-    });
+    if (masked) {
+      const { medicalNotesEnc: _enc, ...rest } = p;
+      res.json({
+        data: { ...rest, email: maskEmail(p.email), phone: maskPhone(p.phone), medicalNotes: undefined },
+      });
+      return;
+    }
+    let medicalNotes: string | null = null;
+    try {
+      medicalNotes = p.medicalNotesEnc ? decryptText(p.medicalNotesEnc) : null;
+    } catch {
+      medicalNotes = null;
+    }
+    const { medicalNotesEnc: _enc, ...rest } = p;
+    res.json({ data: { ...rest, medicalNotes } });
   } catch (e) {
     next(e);
   }

@@ -31,12 +31,21 @@ async function refreshToken(): Promise<string | null> {
   }
 }
 
+function safeParse(text: string): { data?: unknown; error?: { code: string; message: string; details?: unknown }; pagination?: PageEnvelope<unknown>['pagination'] } {
+  if (!text) return {};
+  try {
+    return JSON.parse(text) as { data?: unknown; error?: { code: string; message: string; details?: unknown } };
+  } catch {
+    return { error: { code: 'BAD_RESPONSE', message: 'Server returned a non-JSON response' } };
+  }
+}
+
 /** Fetch wrapper: Bearer auth, one 401→refresh retry, consistent error shape. */
 export async function apiFetch<T>(path: string, opts: RequestInit = {}, retry = true): Promise<T> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json', ...(opts.headers as Record<string, string> | undefined) };
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
   const res = await fetch(`${BASE}${path}`, { ...opts, headers, credentials: 'include' });
-  if (res.status === 401 && retry && accessToken) {
+  if (res.status === 401 && retry) {
     const next = await refreshToken();
     if (next) {
       accessToken = next;
@@ -45,7 +54,7 @@ export async function apiFetch<T>(path: string, opts: RequestInit = {}, retry = 
   }
   if (res.status === 204) return undefined as T;
   const text = await res.text();
-  const json = text ? (JSON.parse(text) as { data?: T; error?: { code: string; message: string; details?: unknown } }) : {};
+  const json = safeParse(text) as { data?: T; error?: { code: string; message: string; details?: unknown } };
   if (!res.ok) {
     throw new ApiError(res.status, json?.error?.code ?? 'REQUEST_FAILED', json?.error?.message ?? `Request failed (${res.status})`, json?.error?.details);
   }
@@ -62,24 +71,24 @@ export interface PageEnvelope<T> {
  * envelope. Plain `apiFetch` unwraps `data`, which drops `pagination` and
  * breaks list pages — use this for every endpoint built with `pageResponse`.
  */
-export async function apiFetchPage<T>(path: string, opts: RequestInit = {}): Promise<PageEnvelope<T>> {
+export async function apiFetchPage<T>(path: string, opts: RequestInit = {}, retry = true): Promise<PageEnvelope<T>> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json', ...(opts.headers as Record<string, string> | undefined) };
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
   const res = await fetch(`${BASE}${path}`, { ...opts, headers, credentials: 'include' });
-  if (res.status === 401 && accessToken) {
+  if (res.status === 401 && retry) {
     const next = await refreshToken();
     if (next) {
       accessToken = next;
-      return apiFetchPage<T>(path, opts);
+      return apiFetchPage<T>(path, opts, false);
     }
   }
   const text = await res.text();
-  const json = text ? (JSON.parse(text) as { data?: T[]; pagination?: PageEnvelope<T>['pagination']; error?: { code: string; message: string; details?: unknown } }) : {};
+  const json = safeParse(text) as { data?: T[]; pagination?: PageEnvelope<T>['pagination']; error?: { code: string; message: string; details?: unknown } };
   if (!res.ok) {
     throw new ApiError(res.status, json?.error?.code ?? 'REQUEST_FAILED', json?.error?.message ?? `Request failed (${res.status})`, json?.error?.details);
   }
   if (!Array.isArray(json?.data) || !json?.pagination) {
-    throw new ApiError(res.status, 'BAD_ENVELOPE', 'Expected paginated { data, pagination } response');
+    throw new ApiError(502, 'BAD_ENVELOPE', 'Expected paginated { data, pagination } response');
   }
   return json as PageEnvelope<T>;
 }

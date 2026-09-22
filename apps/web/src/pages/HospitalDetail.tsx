@@ -24,7 +24,7 @@ export function HospitalDetail() {
         {!h.dataVerified && <UnverifiedBadge />}
         <EmergencyBadge has={h.hasEmergency} />
       </Stack>
-      <Box sx={{ my: 1 }}><AccreditationBadges items={h.accreditation} /></Box>
+      <Box sx={{ my: 1 }}><AccreditationBadges items={h.accreditation} verified={h.dataVerified} /></Box>
       {h.address ? <Typography>{h.address}{mapHref && <> · <a href={mapHref} target="_blank" rel="noreferrer">Map</a></>}</Typography> : <Empty text={t('badges.unverified')} />}
       {h.contact && <Typography>{t('hospitals.contact')}: {h.contact}</Typography>}
       {h.website && <Typography>{t('hospitals.website')}: <a href={h.website} target="_blank" rel="noreferrer">{h.website}</a></Typography>}

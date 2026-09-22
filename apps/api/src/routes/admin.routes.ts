@@ -5,30 +5,47 @@ import { validateBody, validateQuery } from '../middleware/validate.js';
 import { prisma } from '../lib/prisma.js';
 import { parsePagination, pageResponse } from '../lib/pagination.js';
 import { maskEmail, maskPhone } from '../lib/crypto.js';
+import { ApiError } from '../lib/errors.js';
 import { writeAudit } from '../lib/audit.js';
+import { adminLimiter } from '../middleware/rateLimit.js';
 
 const router = Router();
-router.use(authenticate, requireRole('ADMIN'));
+router.use(authenticate, requireRole('ADMIN'), adminLimiter);
 
 router.get(
   '/reports/bookings',
   validateQuery(
     z.object({
-      from: z.string().optional(),
-      to: z.string().optional(),
-      hospitalId: z.string().optional(),
-      specialty: z.string().optional(),
+      from: z.string().datetime().optional(),
+      to: z.string().datetime().optional(),
+      hospitalId: z.string().min(1).optional(),
+      specialty: z.string().max(120).optional(),
       format: z.enum(['json', 'csv']).default('json'),
+      page: z.string().optional(),
+      pageSize: z.string().optional(),
     })
   ),
   async (req, res, next) => {
     try {
-      const q = req.query as { from?: string; to?: string; hospitalId?: string; specialty?: string; format: 'json' | 'csv' };
+      const q = req.query as { from?: string; to?: string; hospitalId?: string; specialty?: string; format: 'json' | 'csv'; page?: string; pageSize?: string };
+      const { page, pageSize, skip, take } = parsePagination(q, 50, 200);
       const where: Record<string, unknown> = {};
       if (q.from || q.to) {
+        const from = q.from ? new Date(q.from) : undefined;
+        const to = q.to ? new Date(q.to) : undefined;
+        if ((from && Number.isNaN(from.getTime())) || (to && Number.isNaN(to.getTime()))) {
+          throw ApiError.badRequest('INVALID_DATE', 'Invalid from/to date');
+        }
+        if (from && to && to.getTime() < from.getTime()) {
+          throw ApiError.badRequest('INVALID_DATE_RANGE', 'to must be after from');
+        }
+        // Max 366-day report window.
+        if (from && to && to.getTime() - from.getTime() > 366 * 86_400_000) {
+          throw ApiError.badRequest('RANGE_TOO_WIDE', 'Report window is max 366 days');
+        }
         (where as Record<string, unknown>).startsAt = {
-          ...(q.from ? { gte: new Date(q.from) } : {}),
-          ...(q.to ? { lte: new Date(q.to) } : {}),
+          ...(from ? { gte: from } : {}),
+          ...(to ? { lte: to } : {}),
         };
       }
       if (q.hospitalId) {
@@ -47,7 +64,10 @@ router.get(
           affiliation: { include: { hospital: { select: { id: true, name: true } } } },
         },
         orderBy: { startsAt: 'asc' },
+        skip,
+        take,
       });
+      const total = await prisma.appointment.count({ where: where as never });
 
       const byDay: Record<string, number> = {};
       const byStatus: Record<string, number> = {};
@@ -61,14 +81,16 @@ router.get(
         byHospital[h] = (byHospital[h] ?? 0) + 1;
         bySpecialty[a.doctor.specialty] = (bySpecialty[a.doctor.specialty] ?? 0) + 1;
       }
-      const report = { total: appts.length, byDay, byStatus, byHospital, bySpecialty };
+      const report = { total, page, pageSize, byDay, byStatus, byHospital, bySpecialty };
 
       if (q.format === 'csv') {
         const rows = ['day,bookings', ...Object.entries(byDay).map(([d, c]) => `${d},${c}`)];
+        await writeAudit({ actorUserId: req.user!.id, action: 'REPORT_READ', entityType: 'Appointment', entityId: 'bookings-report', req, metadata: { total, page, pageSize } });
         res.header('Content-Type', 'text/csv');
         res.send(rows.join('\n'));
         return;
       }
+      await writeAudit({ actorUserId: req.user!.id, action: 'REPORT_READ', entityType: 'Appointment', entityId: 'bookings-report', req, metadata: { total, page, pageSize } });
       res.json({ data: report });
     } catch (e) {
       next(e);
@@ -78,7 +100,7 @@ router.get(
 
 router.get(
   '/users',
-  validateQuery(z.object({ role: z.string().optional(), q: z.string().optional(), page: z.string().optional(), pageSize: z.string().optional() })),
+  validateQuery(z.object({ role: z.enum(['PATIENT', 'DOCTOR', 'ADMIN']).optional(), q: z.string().max(160).optional(), page: z.string().optional(), pageSize: z.string().optional() })),
   async (req, res, next) => {
     try {
       const q = req.query as { role?: string; q?: string; page?: string; pageSize?: string };
@@ -103,9 +125,23 @@ router.patch(
   validateBody(z.object({ role: z.enum(['PATIENT', 'DOCTOR', 'ADMIN']) })),
   async (req, res, next) => {
     try {
+      const target = await prisma.user.findUnique({ where: { id: req.params.id } });
+      if (!target) throw ApiError.notFound('USER_NOT_FOUND', 'User not found');
+      // Prevent accidental self-demotion.
+      if (target.id === req.user!.id && req.body.role !== 'ADMIN') {
+        throw ApiError.badRequest('CANNOT_DEMOTE_SELF', 'Admins cannot demote their own account');
+      }
+      // Prevent removal of the last administrator.
+      if (target.role === 'ADMIN' && req.body.role !== 'ADMIN') {
+        const adminCount = await prisma.user.count({ where: { role: 'ADMIN' as never } });
+        if (adminCount <= 1) {
+          throw ApiError.badRequest('LAST_ADMIN', 'Cannot remove the last administrator');
+        }
+      }
       const updated = await prisma.user.update({ where: { id: req.params.id }, data: { role: req.body.role as never } });
-      await writeAudit({ actorUserId: req.user!.id, action: 'USER_ROLE_CHANGE', entityType: 'User', entityId: updated.id, req, metadata: { role: req.body.role } });
-      res.json({ data: { ...updated, passwordHash: undefined } });
+      await writeAudit({ actorUserId: req.user!.id, action: 'USER_ROLE_CHANGE', entityType: 'User', entityId: updated.id, req, metadata: { from: target.role, to: req.body.role } });
+      const { passwordHash: _ph, ...safe } = updated;
+      res.json({ data: safe });
     } catch (e) {
       next(e);
     }
@@ -114,7 +150,7 @@ router.patch(
 
 router.get(
   '/audit-logs',
-  validateQuery(z.object({ entityType: z.string().optional(), action: z.string().optional(), page: z.string().optional(), pageSize: z.string().optional() })),
+  validateQuery(z.object({ entityType: z.string().max(60).optional(), action: z.string().max(60).optional(), page: z.string().optional(), pageSize: z.string().optional() })),
   async (req, res, next) => {
     try {
       const q = req.query as { entityType?: string; action?: string; page?: string; pageSize?: string };

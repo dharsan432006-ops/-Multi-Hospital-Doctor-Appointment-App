@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
+import { Avatar, Card, CardContent, CardMedia, Chip, Stack, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import type { Doctor } from '../api/types.js';
 import { DemoBadge } from './Badges.js';
@@ -21,9 +21,11 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
     <Card sx={{ display: 'flex', gap: 2, p: 2 }} component={RouterLink} to={`/doctors/${doctor.id}`} style={{ textDecoration: 'none' }}>
       <DoctorAvatar doctor={doctor} />
       <CardContent sx={{ p: 0, flexGrow: 1 }}>
-        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.5 }}>
           <Typography variant="h6">{doctor.name}</Typography>
           {doctor.isDemo && <DemoBadge />}
+          {!doctor.isDemo && doctor.isVerified && <Chip size="small" color="success" label="Verified" />}
+          {!doctor.isDemo && !doctor.isVerified && <Chip size="small" variant="outlined" label="Unverified" />}
         </Stack>
         <Typography color="text.secondary">{doctor.specialty} · {doctor.qualifications}</Typography>
         <Typography variant="body2" color="text.secondary">{doctor.languages.join(', ')}</Typography>

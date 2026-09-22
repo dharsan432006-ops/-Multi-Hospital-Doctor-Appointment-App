@@ -6,7 +6,7 @@ import { formatIST, formatISTDay } from '../api/client.js';
 import { Empty } from './States.js';
 
 /** Groups UTC slots by IST calendar day; emits the chosen slot. */
-export function SlotPicker({ slots, onPick, picked }: { slots: Slot[]; onPick: (s: Slot) => void; picked?: Slot | null }) {
+export function SlotPicker({ slots, onPick, picked, loading, loadError, onRetry }: { slots: Slot[]; onPick: (s: Slot) => void; picked?: Slot | null; loading?: boolean; loadError?: boolean; onRetry?: () => void }) {
   const { t } = useTranslation();
   const groups = useMemo(() => {
     const map = new Map<string, Slot[]>();
@@ -19,14 +19,26 @@ export function SlotPicker({ slots, onPick, picked }: { slots: Slot[]; onPick: (
     return [...map.entries()];
   }, [slots]);
   const [dayIdx, setDayIdx] = useState(0);
+  const safeDayIdx = Math.min(dayIdx, Math.max(0, groups.length - 1));
+  if (loading) return <Typography role="status">{t('common.loading')}</Typography>;
+  if (loadError) return <Box><Typography color="error">Failed to load slots.</Typography>{onRetry && <Button onClick={onRetry}>{t('common.retry')}</Button>}</Box>;
   if (slots.length === 0) return <Empty text={t('doctors.noSlots')} />;
-  const active = groups[Math.min(dayIdx, groups.length - 1)];
+  const active = groups[safeDayIdx];
 
   return (
     <Box>
-      <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
+      <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 0.5, mb: 2 }} role="tablist" aria-label="Available days">
         {groups.map(([day], i) => (
-          <Chip key={day} label={day} clickable color={i === dayIdx ? 'primary' : 'default'} onClick={() => setDayIdx(i)} />
+          <Chip
+            key={day}
+            label={day}
+            clickable
+            color={i === safeDayIdx ? 'primary' : 'default'}
+            onClick={() => setDayIdx(i)}
+            aria-pressed={i === safeDayIdx}
+            role="tab"
+            aria-selected={i === safeDayIdx}
+          />
         ))}
       </Stack>
       <Typography variant="subtitle1" sx={{ mb: 1 }}>{active[0]} (IST)</Typography>
@@ -35,8 +47,10 @@ export function SlotPicker({ slots, onPick, picked }: { slots: Slot[]; onPick: (
           <Button
             key={s.startsAt + s.affiliationId}
             size="small"
-            variant={picked?.startsAt === s.startsAt ? 'contained' : 'outlined'}
+            variant={picked?.startsAt === s.startsAt && picked?.affiliationId === s.affiliationId ? 'contained' : 'outlined'}
             onClick={() => onPick(s)}
+            aria-pressed={picked?.startsAt === s.startsAt && picked?.affiliationId === s.affiliationId}
+            aria-label={`Book slot ${formatIST(s.startsAt, { hour: '2-digit', minute: '2-digit', hour12: true })} IST`}
           >
             {formatIST(s.startsAt, { hour: '2-digit', minute: '2-digit', hour12: true })}
           </Button>

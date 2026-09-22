@@ -4,12 +4,33 @@ import { getConfig } from '../config/config.js';
 import {
   MAX_AVAILABILITY_DAYS,
   canCancel,
+  findCoveringRule,
   isSlotCovered,
   istMidnightUtcMillis,
   overlaps,
   slotsForRuleOnDate,
 } from './slot.service.js';
 import { enqueueAppointmentEvent, scheduleReminders } from '../jobs/queues.js';
+
+/** Explicit appointment lifecycle. Terminal states accept no further transitions. */
+export const STATUS_TRANSITIONS: Record<string, string[]> = {
+  PENDING: ['CONFIRMED', 'CANCELLED'],
+  CONFIRMED: ['COMPLETED', 'NO_SHOW', 'CANCELLED'],
+  COMPLETED: [],
+  NO_SHOW: [],
+  CANCELLED: [],
+};
+
+export function assertValidTransition(from: string, to: string) {
+  if (from === to) return;
+  const allowed = STATUS_TRANSITIONS[from] ?? [];
+  if (!allowed.includes(to)) {
+    throw ApiError.badRequest(
+      'INVALID_STATUS_TRANSITION',
+      `Cannot transition appointment from ${from} to ${to}`
+    );
+  }
+}
 
 /** Resolve affiliation for doctor+hospital, ensuring department link. */
 async function resolveAffiliation(doctorId: string, hospitalId: string | undefined, affiliationId: string | undefined) {
@@ -57,6 +78,9 @@ export async function getAvailability(doctorId: string, hospitalId: string | und
   if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
     throw ApiError.badRequest('INVALID_DATE', 'Invalid from/to date');
   }
+  if (end.getTime() < start.getTime()) {
+    throw ApiError.badRequest('INVALID_DATE_RANGE', 'to must be after from');
+  }
   if (end.getTime() - start.getTime() > (MAX_AVAILABILITY_DAYS + 1) * 86_400_000) {
     throw ApiError.badRequest('RANGE_TOO_WIDE', `Availability window is max ${MAX_AVAILABILITY_DAYS} days`);
   }
@@ -103,7 +127,9 @@ export async function getAvailability(doctorId: string, hospitalId: string | und
     }
   }
   slots.sort((a, b) => a.startsAt.getTime() - b.startsAt.getTime());
-  return slots.map((s) => ({
+  const MAX_SLOTS = 500;
+  const capped = slots.slice(0, MAX_SLOTS);
+  return capped.map((s) => ({
     affiliationId: s.affiliationId,
     hospitalId: s.hospitalId,
     startsAt: s.startsAt.toISOString(),
@@ -164,7 +190,15 @@ export async function bookAppointment(input: {
         return mins >= sh * 60 + sm && mins + r.slotMinutes <= eh * 60 + em;
       });
       if (!rule) throw ApiError.badRequest('SLOT_OUTSIDE_HOURS', 'Slot is outside consultation hours');
+      // Strict grid alignment: e.g. 09:07 rejected for 20-min rules starting 09:00.
+      const [rsh, rsm] = rule.startTime.split(':').map(Number);
+      if ((mins - (rsh * 60 + rsm)) % rule.slotMinutes !== 0) {
+        throw ApiError.badRequest('INVALID_SLOT_ALIGNMENT', 'Slot start is not on the schedule grid');
+      }
       const endsAt = new Date(startsAt.getTime() + rule.slotMinutes * 60_000);
+      if (!findCoveringRule(startsAt, endsAt, rules)) {
+        throw ApiError.badRequest('INVALID_SLOT_ALIGNMENT', 'Slot start is not on the schedule grid');
+      }
 
       if (!isSlotCovered(startsAt, endsAt, rules, timeOffs)) {
         throw ApiError.badRequest('SLOT_UNAVAILABLE', 'Slot unavailable (time-off or outside hours)');
@@ -279,7 +313,13 @@ export async function rescheduleAppointment(input: {
     if (!canCancel(appt.startsAt, new Date(), cfg.CANCELLATION_CUTOFF_HOURS)) {
       throw ApiError.badRequest('RESCHEDULE_CUTOFF', 'Reschedule past the cancellation cutoff');
     }
+  } else if (input.actor.role === 'DOCTOR') {
+    const doc = await prisma.doctor.findFirst({ where: { userId: input.actor.id } });
+    if (!doc || appt.doctorId !== doc.id) {
+      throw ApiError.forbidden('NOT_YOUR_APPOINTMENT', 'Not your appointment');
+    }
   }
+  // ADMIN bypasses ownership (administrative reschedule), still subject to slot rules below.
 
   let updated;
   try {
@@ -297,7 +337,14 @@ export async function rescheduleAppointment(input: {
           return mins >= sh * 60 + sm && mins + r.slotMinutes <= eh * 60 + em;
         });
         if (!rule) throw ApiError.badRequest('SLOT_OUTSIDE_HOURS', 'New slot outside consultation hours');
+        const [nrsh, nrsm] = rule.startTime.split(':').map(Number);
+        if ((mins - (nrsh * 60 + nrsm)) % rule.slotMinutes !== 0) {
+          throw ApiError.badRequest('INVALID_SLOT_ALIGNMENT', 'New slot start is not on the schedule grid');
+        }
         const newEndsAt = new Date(newStartsAt.getTime() + rule.slotMinutes * 60_000);
+        if (!findCoveringRule(newStartsAt, newEndsAt, rules)) {
+          throw ApiError.badRequest('INVALID_SLOT_ALIGNMENT', 'New slot start is not on the schedule grid');
+        }
         if (!isSlotCovered(newStartsAt, newEndsAt, rules, timeOffs)) {
           throw ApiError.badRequest('SLOT_UNAVAILABLE', 'New slot unavailable');
         }
@@ -311,9 +358,10 @@ export async function rescheduleAppointment(input: {
           },
         });
         if (clash) throw ApiError.conflict('DOCTOR_UNAVAILABLE', 'Doctor already booked at new time');
+        // Preserve existing status (PENDING stays PENDING); never silently upgrade.
         return tx.appointment.update({
           where: { id: appt.id },
-          data: { startsAt: newStartsAt, endsAt: newEndsAt, status: 'CONFIRMED' as never },
+          data: { startsAt: newStartsAt, endsAt: newEndsAt },
         });
       },
       { isolationLevel: 'Serializable', timeout: 10_000 }
@@ -336,9 +384,29 @@ export async function rescheduleAppointment(input: {
 export async function setAppointmentStatus(input: {
   appointmentId: string;
   status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'NO_SHOW' | 'CANCELLED';
+  actor?: { id: string; role: string };
 }) {
   const appt = await prisma.appointment.findUnique({ where: { id: input.appointmentId } });
   if (!appt) throw ApiError.notFound('APPOINTMENT_NOT_FOUND', 'Appointment not found');
+  if (appt.status === input.status) return appt;
+  assertValidTransition(appt.status, input.status);
+  // Cancellation via status endpoint must behave exactly like cancelAppointment.
+  if (input.status === 'CANCELLED') {
+    if (input.actor?.role === 'PATIENT') {
+      const owner = await prisma.patient.findFirst({ where: { id: appt.patientId, userId: input.actor.id } });
+      if (!owner) throw ApiError.forbidden('NOT_YOUR_BOOKING', 'Not your booking');
+      const cfg = getConfig();
+      if (!canCancel(appt.startsAt, new Date(), cfg.CANCELLATION_CUTOFF_HOURS)) {
+        throw ApiError.badRequest('CANCELLATION_CUTOFF', `Cancellation allowed up to ${cfg.CANCELLATION_CUTOFF_HOURS}h before`);
+      }
+    }
+    const updated = await prisma.appointment.update({
+      where: { id: appt.id },
+      data: { status: 'CANCELLED' as never, cancelledAt: new Date(), cancelledBy: input.actor?.role ?? 'STAFF' },
+    });
+    await enqueueAppointmentEvent(updated.id, 'CANCELLED');
+    return updated;
+  }
   const updated = await prisma.appointment.update({
     where: { id: appt.id },
     data: { status: input.status as never },

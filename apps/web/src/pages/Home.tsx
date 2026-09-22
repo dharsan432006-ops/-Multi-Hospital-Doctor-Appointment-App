@@ -13,6 +13,7 @@ export function Home() {
   const [symptoms, setSymptoms] = useState('');
   const [aiResult, setAiResult] = useState<{ specialties: string[]; urgency: string; nextStep: string } | null>(null);
   const [aiError, setAiError] = useState('');
+  const [aiPending, setAiPending] = useState(false);
 
   const search = () => {
     const qs = new URLSearchParams();
@@ -23,15 +24,20 @@ export function Home() {
   };
 
   const askAi = async () => {
+    if (aiPending || symptoms.length < 3) return;
+    setAiPending(true);
     setAiError('');
+    setAiResult(null);
     try {
       const res = await apiFetch<{ specialties: string[]; urgency: string; nextStep: string; disclaimer: string }>('/ai/symptom-guide', {
         method: 'POST',
-        body: JSON.stringify({ symptoms }),
+        body: JSON.stringify({ symptoms: symptoms.slice(0, 1000) }),
       });
       setAiResult(res);
     } catch (e) {
       setAiError(e instanceof Error ? e.message : 'AI unavailable');
+    } finally {
+      setAiPending(false);
     }
   };
 
@@ -50,7 +56,7 @@ export function Home() {
         <Typography variant="h6" gutterBottom>{t('ai.title')}</Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
           <TextField label={t('ai.symptomsPh')} value={symptoms} onChange={(e) => setSymptoms(e.target.value)} fullWidth multiline minRows={2} />
-          <Button variant="outlined" onClick={askAi} disabled={symptoms.length < 3}>{t('ai.ask')}</Button>
+          <Button variant="outlined" onClick={() => void askAi()} disabled={symptoms.length < 3 || aiPending}>{aiPending ? t('common.loading') : t('ai.ask')}</Button>
         </Stack>
         {aiError && <Alert severity="warning" sx={{ mt: 1 }}>{aiError} ({t('ai.disclaimer')})</Alert>}
         {aiResult && (

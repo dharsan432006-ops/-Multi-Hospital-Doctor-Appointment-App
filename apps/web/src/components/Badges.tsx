@@ -23,10 +23,19 @@ export function EmergencyBadge({ has }: { has: boolean }) {
   );
 }
 
-export function AccreditationBadges({ items }: { items: string[] }) {
+export function AccreditationBadges({ items, verified }: { items: string[]; verified?: boolean }) {
   return (
     <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap', gap: 0.5 }}>
-      {items.map((a) => <Chip key={a} size="small" color="success" icon={<VerifiedIcon />} label={a} />)}
+      {items.map((a) => (
+        <Chip
+          key={a}
+          size="small"
+          color={verified ? 'success' : 'default'}
+          variant={verified ? 'filled' : 'outlined'}
+          icon={verified ? <VerifiedIcon /> : undefined}
+          label={verified ? a : `${a} (unverified)`}
+        />
+      ))}
     </Stack>
   );
 }

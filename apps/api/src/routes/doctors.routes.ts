@@ -84,6 +84,59 @@ router.get('/me/availability', authenticate, requireRole('DOCTOR'), async (req, 
   }
 });
 
+function timeToMin(t: string): number {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function validateAvailabilityRules(rules: { dayOfWeek: number; startTime: string; endTime: string; slotMinutes: number }[]) {
+  const seen = new Set<string>();
+  for (const r of rules) {
+    if (!Number.isInteger(r.dayOfWeek) || r.dayOfWeek < 0 || r.dayOfWeek > 6) {
+      throw ApiError.badRequest('INVALID_WEEKDAY', 'dayOfWeek must be 0-6');
+    }
+    if (!/^\d{1,2}:\d{2}$/.test(r.startTime) || !/^\d{1,2}:\d{2}$/.test(r.endTime)) {
+      throw ApiError.badRequest('INVALID_TIME_RANGE', 'startTime/endTime must be HH:mm');
+    }
+    const s = timeToMin(r.startTime);
+    const e = timeToMin(r.endTime);
+    const [sh, sm] = r.startTime.split(':').map(Number);
+    const [eh, em] = r.endTime.split(':').map(Number);
+    if (sh > 23 || sm > 59 || eh > 23 || em > 59) {
+      throw ApiError.badRequest('INVALID_TIME_RANGE', 'Hour must be 0-23 and minute 0-59');
+    }
+    if (e <= s) {
+      throw ApiError.badRequest('INVALID_TIME_RANGE', 'endTime must be after startTime');
+    }
+    if (!Number.isInteger(r.slotMinutes) || r.slotMinutes < 5 || r.slotMinutes > 120) {
+      throw ApiError.badRequest('INVALID_SLOT_DURATION', 'slotMinutes must be 5-120');
+    }
+    if ((e - s) % r.slotMinutes !== 0 && (e - s) < r.slotMinutes) {
+      throw ApiError.badRequest('INVALID_SLOT_DURATION', 'Window must fit at least one full slot');
+    }
+    const key = `${r.dayOfWeek}|${r.startTime}|${r.endTime}|${r.slotMinutes}`;
+    if (seen.has(key)) {
+      throw ApiError.badRequest('DUPLICATE_RULE', 'Duplicate availability rule');
+    }
+    seen.add(key);
+  }
+  // Overlap detection within the same day.
+  const byDay = new Map<number, { s: number; e: number }[]>();
+  for (const r of rules) {
+    const arr = byDay.get(r.dayOfWeek) ?? [];
+    arr.push({ s: timeToMin(r.startTime), e: timeToMin(r.endTime) });
+    byDay.set(r.dayOfWeek, arr);
+  }
+  for (const [, arr] of byDay) {
+    arr.sort((a, b) => a.s - b.s);
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i].s < arr[i - 1].e) {
+        throw ApiError.badRequest('OVERLAPPING_RULES', 'Availability rules overlap on the same day');
+      }
+    }
+  }
+}
+
 const AvailabilityPut = z.object({
   hospitalId: z.string().min(1),
   rules: z
@@ -108,15 +161,17 @@ router.put('/me/availability', authenticate, requireRole('DOCTOR'), validateBody
     });
     if (!aff) throw ApiError.badRequest('NOT_AFFILIATED', 'Not affiliated with this hospital');
 
-    // Overlap guard: new rules must not create same-doctor overlaps is enforced at booking;
-    // here validate no overlapping rules within the same affiliation/day.
-    await prisma.availabilityRule.deleteMany({ where: { affiliationId: aff.id } });
-    for (const r of body.rules) {
-      await prisma.availabilityRule.create({
-        data: { affiliationId: aff.id, dayOfWeek: r.dayOfWeek, startTime: r.startTime, endTime: r.endTime, slotMinutes: r.slotMinutes },
-      });
-    }
-    await prisma.doctorAffiliation.update({ where: { id: aff.id }, data: { schedulePending: body.rules.length === 0 } });
+    validateAvailabilityRules(body.rules);
+    // Transactional replace: never leave an empty ruleset on partial failure.
+    await prisma.$transaction(async (tx) => {
+      await tx.availabilityRule.deleteMany({ where: { affiliationId: aff.id } });
+      for (const r of body.rules) {
+        await tx.availabilityRule.create({
+          data: { affiliationId: aff.id, dayOfWeek: r.dayOfWeek, startTime: r.startTime, endTime: r.endTime, slotMinutes: r.slotMinutes },
+        });
+      }
+      await tx.doctorAffiliation.update({ where: { id: aff.id }, data: { schedulePending: body.rules.length === 0 } });
+    });
     await writeAudit({ actorUserId: req.user!.id, action: 'DOCTOR_AVAILABILITY_UPDATE', entityType: 'DoctorAffiliation', entityId: aff.id, req });
     const updated = await prisma.doctorAffiliation.findUnique({
       where: { id: aff.id },
@@ -138,10 +193,40 @@ router.post('/me/time-off', authenticate, requireRole('DOCTOR'), validateBody(Ti
   try {
     const doctor = await prisma.doctor.findFirst({ where: { userId: req.user!.id } });
     if (!doctor) throw ApiError.notFound('DOCTOR_PROFILE_MISSING', 'Doctor profile not linked');
-    const created = await prisma.timeOff.create({
-      data: { doctorId: doctor.id, startsAt: new Date(req.body.startsAt), endsAt: new Date(req.body.endsAt), reason: req.body.reason ?? null },
+    const startsAt = new Date(req.body.startsAt);
+    const endsAt = new Date(req.body.endsAt);
+    if (Number.isNaN(startsAt.getTime()) || Number.isNaN(endsAt.getTime())) {
+      throw ApiError.badRequest('INVALID_DATE', 'Invalid time-off range');
+    }
+    if (endsAt <= startsAt) {
+      throw ApiError.badRequest('INVALID_TIME_OFF_RANGE', 'endsAt must be after startsAt');
+    }
+    const overlappingOff = await prisma.timeOff.findFirst({
+      where: { doctorId: doctor.id, startsAt: { lt: endsAt }, endsAt: { gt: startsAt } },
     });
-    res.status(201).json({ data: created });
+    if (overlappingOff) {
+      throw ApiError.conflict('TIME_OFF_OVERLAP', 'Time-off overlaps an existing time-off block');
+    }
+    const conflicting = await prisma.appointment.count({
+      where: {
+        doctorId: doctor.id,
+        status: { in: ['PENDING', 'CONFIRMED'] as never },
+        startsAt: { lt: endsAt },
+        endsAt: { gt: startsAt },
+      },
+    });
+    const created = await prisma.timeOff.create({
+      data: { doctorId: doctor.id, startsAt, endsAt, reason: req.body.reason ?? null },
+    });
+    await writeAudit({
+      actorUserId: req.user!.id,
+      action: 'DOCTOR_TIMEOFF_CREATE',
+      entityType: 'TimeOff',
+      entityId: created.id,
+      req,
+      metadata: { conflictingActiveAppointments: conflicting },
+    });
+    res.status(201).json({ data: { ...created, conflictingActiveAppointments: conflicting } });
   } catch (e) {
     next(e);
   }

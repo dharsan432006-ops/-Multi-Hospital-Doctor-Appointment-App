@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { validateBody } from '../middleware/validate.js';
 import { authenticate } from '../middleware/auth.js';
-import { loginLimiter, registerLimiter } from '../middleware/rateLimit.js';
+import { loginLimiter, refreshLimiter, registerLimiter } from '../middleware/rateLimit.js';
 import {
   REFRESH_COOKIE,
   login,
@@ -64,7 +64,7 @@ router.post('/login', loginLimiter, validateBody(LoginSchema), async (req, res, 
   }
 });
 
-router.post('/refresh', async (req, res, next) => {
+router.post('/refresh', refreshLimiter, async (req, res, next) => {
   try {
     const presented = req.cookies?.[REFRESH_COOKIE] as string | undefined;
     const { accessToken, refresh: rt, user } = await refresh(presented);
@@ -75,7 +75,7 @@ router.post('/refresh', async (req, res, next) => {
   }
 });
 
-router.post('/logout', async (req, res, next) => {
+router.post('/logout', refreshLimiter, async (req, res, next) => {
   try {
     const presented = req.cookies?.[REFRESH_COOKIE] as string | undefined;
     await logout(presented);

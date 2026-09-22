@@ -16,7 +16,7 @@ async function commsOptedIn(patientId: string): Promise<boolean> {
     where: { id: patientId },
     select: { userId: true },
   });
-  if (!patient) return true;
+  if (!patient) return false;
   const rec = await prisma.consentRecord.findUnique({
     where: {
       userId_purpose_policyVersion: {
@@ -26,15 +26,18 @@ async function commsOptedIn(patientId: string): Promise<boolean> {
       },
     },
   });
-  if (!rec) return true;
+  // Default deny: no optional communication unless the user explicitly consented.
+  if (!rec) return false;
   return !rec.withdrawnAt;
 }
+
+export type NotifyStatus = 'QUEUED' | 'SENT' | 'SIMULATED' | 'DISABLED' | 'FAILED';
 
 async function log(
   appointmentId: string | null,
   channel: NotifyChannel,
   type: NotifyType,
-  status: 'QUEUED' | 'SENT' | 'FAILED',
+  status: NotifyStatus,
   providerMessageId?: string
 ) {
   try {
@@ -46,13 +49,13 @@ async function log(
   }
 }
 
-async function sendEmail(to: string, subject: string, text: string) {
+async function sendEmail(to: string, subject: string, text: string): Promise<{ id: string; simulated: boolean }> {
   const cfg = getConfig();
   const provider = cfg.NOTIFICATION_PROVIDER;
   if (provider === 'console' || provider === 'twilio' || !cfg.SENDGRID_API_KEY) {
     // eslint-disable-next-line no-console
     console.log(`[email:${maskEmail(to)}] ${subject} — ${text.slice(0, 160)}`);
-    return 'console-email';
+    return { id: 'console-email', simulated: true };
   }
   // SendGrid stub (no hard dependency): best-effort fetch, fallback to console.
   try {
@@ -67,26 +70,27 @@ async function sendEmail(to: string, subject: string, text: string) {
       }),
     });
     if (!res.ok) throw new Error(`SendGrid ${res.status}`);
-    return 'sendgrid';
+    return { id: 'sendgrid', simulated: false };
   } catch {
     // eslint-disable-next-line no-console
     console.log(`[email-fallback:${maskEmail(to)}] ${subject}`);
-    return 'console-fallback';
+    return { id: 'console-fallback', simulated: true };
   }
 }
 
-async function sendSms(to: string, text: string) {
+async function sendSms(to: string, text: string): Promise<{ id: string; simulated: boolean }> {
   const cfg = getConfig();
   const provider = cfg.NOTIFICATION_PROVIDER;
-  if (provider === 'console' || provider === 'sendgrid' || !cfg.TWILIO_ACCOUNT_SID) {
+  // SMS provider is not implemented: never claim SENT. Console output is a simulation.
+  if (provider === 'console' || provider === 'sendgrid' || !cfg.TWILIO_ACCOUNT_SID || !cfg.TWILIO_AUTH_TOKEN) {
     // eslint-disable-next-line no-console
     console.log(`[sms:${maskPhone(to)}] ${text.slice(0, 160)}`);
-    return 'console-sms';
+    return { id: 'console-sms', simulated: true };
   }
-  // Twilio stub: real call would POST to api.twilio.com; keep console fallback.
+  // Twilio not wired: record SIMULATED rather than SENT until a real provider call exists.
   // eslint-disable-next-line no-console
   console.log(`[sms:${maskPhone(to)}] ${text.slice(0, 160)}`);
-  return 'console-sms';
+  return { id: 'twilio-not-configured', simulated: true };
 }
 
 export async function notifyAppointment(
@@ -102,7 +106,7 @@ export async function notifyAppointment(
 
   const optedIn = await commsOptedIn(appt.patientId);
   if (!optedIn) {
-    await log(appointmentId, 'CONSOLE', type, 'QUEUED', 'opted-out');
+    await log(appointmentId, 'CONSOLE', type, 'DISABLED', 'comms-consent-missing-or-withdrawn');
     return;
   }
 
@@ -122,8 +126,8 @@ export async function notifyAppointment(
   const body = `${subjects[type]}: ${doc} at ${when} (IST). ID ${appointmentId}.`;
 
   await log(appointmentId, 'CONSOLE', type, 'QUEUED');
-  const emailId = await sendEmail(email, subjects[type], body);
-  await log(appointmentId, 'EMAIL', type, 'SENT', String(emailId));
-  const smsId = await sendSms(phone, body);
-  await log(appointmentId, 'SMS', type, 'SENT', String(smsId));
+  const emailRes = await sendEmail(email, subjects[type], body);
+  await log(appointmentId, 'EMAIL', type, emailRes.simulated ? 'SIMULATED' : 'SENT', String(emailRes.id));
+  const smsRes = await sendSms(phone, body);
+  await log(appointmentId, 'SMS', type, smsRes.simulated ? 'SIMULATED' : 'SENT', String(smsRes.id));
 }

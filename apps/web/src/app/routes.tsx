@@ -1,19 +1,21 @@
+import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.js';
 import { Loading } from '../components/States.js';
 import { Home } from '../pages/Home.js';
-import { HospitalList } from '../pages/HospitalList.js';
-import { HospitalDetail } from '../pages/HospitalDetail.js';
-import { DoctorList } from '../pages/DoctorList.js';
-import { DoctorProfile } from '../pages/DoctorProfile.js';
-import { BookingConfirm } from '../pages/BookingConfirm.js';
-import { Login } from '../pages/Login.js';
-import { Register } from '../pages/Register.js';
-import { MyBookings } from '../pages/MyBookings.js';
-import { Profile } from '../pages/Profile.js';
-import { DoctorPortal } from '../pages/DoctorPortal.js';
-import { AdminDashboard } from '../pages/AdminDashboard.js';
-import { NotFound } from '../pages/NotFound.js';
+
+const HospitalList = lazy(() => import('../pages/HospitalList.js').then((m) => ({ default: m.HospitalList })));
+const HospitalDetail = lazy(() => import('../pages/HospitalDetail.js').then((m) => ({ default: m.HospitalDetail })));
+const DoctorList = lazy(() => import('../pages/DoctorList.js').then((m) => ({ default: m.DoctorList })));
+const DoctorProfile = lazy(() => import('../pages/DoctorProfile.js').then((m) => ({ default: m.DoctorProfile })));
+const BookingConfirm = lazy(() => import('../pages/BookingConfirm.js').then((m) => ({ default: m.BookingConfirm })));
+const Login = lazy(() => import('../pages/Login.js').then((m) => ({ default: m.Login })));
+const Register = lazy(() => import('../pages/Register.js').then((m) => ({ default: m.Register })));
+const MyBookings = lazy(() => import('../pages/MyBookings.js').then((m) => ({ default: m.MyBookings })));
+const Profile = lazy(() => import('../pages/Profile.js').then((m) => ({ default: m.Profile })));
+const DoctorPortal = lazy(() => import('../pages/DoctorPortal.js').then((m) => ({ default: m.DoctorPortal })));
+const AdminDashboard = lazy(() => import('../pages/AdminDashboard.js').then((m) => ({ default: m.AdminDashboard })));
+const NotFound = lazy(() => import('../pages/NotFound.js').then((m) => ({ default: m.NotFound })));
 
 function RequireAuth({ roles, children }: { roles?: string[]; children: JSX.Element }) {
   const { user, loading } = useAuth();
@@ -24,8 +26,13 @@ function RequireAuth({ roles, children }: { roles?: string[]; children: JSX.Elem
   return children;
 }
 
+function Forbidden() {
+  return <Navigate to="/" replace />;
+}
+
 export function AppRoutes() {
   return (
+    <Suspense fallback={<Loading />}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/hospitals" element={<HospitalList />} />
@@ -39,7 +46,9 @@ export function AppRoutes() {
       <Route path="/profile" element={<RequireAuth roles={['PATIENT', 'DOCTOR', 'ADMIN']}><Profile /></RequireAuth>} />
       <Route path="/doctor" element={<RequireAuth roles={['DOCTOR']}><DoctorPortal /></RequireAuth>} />
       <Route path="/admin" element={<RequireAuth roles={['ADMIN']}><AdminDashboard /></RequireAuth>} />
+      <Route path="/forbidden" element={<Forbidden />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </Suspense>
   );
 }

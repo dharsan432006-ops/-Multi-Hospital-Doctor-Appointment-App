@@ -69,3 +69,9 @@ variable "alert_email" {
   type        = string
   default     = ""
 }
+
+variable "acm_certificate_arn" {
+  description = "ACM certificate ARN (ap-south-1) for ALB HTTPS listener. No default: must be provided for production."
+  type        = string
+  default     = ""
+}

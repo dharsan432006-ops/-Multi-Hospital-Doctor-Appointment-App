@@ -19,7 +19,7 @@ export function HospitalCard({ hospital }: { hospital: Hospital }) {
           {!hospital.dataVerified && <UnverifiedBadge />}
           <EmergencyBadge has={hospital.hasEmergency} />
         </Stack>
-        <AccreditationBadges items={hospital.accreditation} />
+        <AccreditationBadges items={hospital.accreditation} verified={hospital.dataVerified} />
         {hospital.address ? (
           <Typography variant="body2" sx={{ mt: 1 }}>{hospital.address}{mapHref && <> · <a href={mapHref} target="_blank" rel="noreferrer">Map</a></>}</Typography>
         ) : (

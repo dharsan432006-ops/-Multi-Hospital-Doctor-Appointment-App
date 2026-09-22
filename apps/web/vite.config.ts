@@ -9,4 +9,17 @@ export default defineConfig({
       '/api': 'http://localhost:4000',
     },
   },
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          mui: ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+          query: ['@tanstack/react-query'],
+          charts: ['recharts'],
+        },
+      },
+    },
+  },
 });

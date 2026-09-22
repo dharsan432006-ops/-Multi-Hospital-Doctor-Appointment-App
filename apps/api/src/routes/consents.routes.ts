@@ -37,16 +37,22 @@ router.delete('/:purpose', authenticate, async (req, res, next) => {
       res.status(404).json({ error: { code: 'UNKNOWN_PURPOSE', message: 'Unknown consent purpose' } });
       return;
     }
-    const rec = await prisma.consentRecord.findUnique({
-      where: { userId_purpose_policyVersion: { userId: req.user!.id, purpose: req.params.purpose as never, policyVersion: 'v1.0' } },
+    // Withdraw ALL policy versions for this purpose (not just v1.0).
+    const recs = await prisma.consentRecord.findMany({
+      where: { userId: req.user!.id, purpose: req.params.purpose as never, withdrawnAt: null },
     });
-    if (!rec) {
-      res.json({ data: { ok: true } });
+    if (recs.length === 0) {
+      res.json({ data: { ok: true, withdrawn: 0 } });
       return;
     }
-    const updated = await prisma.consentRecord.update({ where: { id: rec.id }, data: { withdrawnAt: new Date() } });
-    await writeAudit({ actorUserId: req.user!.id, action: 'CONSENT_WITHDRAW', entityType: 'ConsentRecord', entityId: rec.id, req, metadata: { purpose: req.params.purpose } });
-    res.json({ data: updated });
+    await prisma.consentRecord.updateMany({
+      where: { userId: req.user!.id, purpose: req.params.purpose as never, withdrawnAt: null },
+      data: { withdrawnAt: new Date() },
+    });
+    const first = recs[0];
+    await writeAudit({ actorUserId: req.user!.id, action: 'CONSENT_WITHDRAW', entityType: 'ConsentRecord', entityId: first.id, req, metadata: { purpose: req.params.purpose, withdrawn: recs.length } });
+    const updated = await prisma.consentRecord.findUnique({ where: { id: first.id } });
+    res.json({ data: { ...updated, withdrawn: recs.length } });
   } catch (e) {
     next(e);
   }

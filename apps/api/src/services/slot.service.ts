@@ -74,6 +74,33 @@ export function overlaps(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date): bo
 }
 
 /** Pure: is a slot inside any rule and outside all time-offs? */
+export function findCoveringRule(startsAt: Date, endsAt: Date, rules: RuleLike[]): RuleLike | null {
+  const ist = new Date(startsAt.getTime() + IST_OFFSET_MIN * 60_000);
+  const dow = ist.getUTCDay();
+  const mins = ist.getUTCHours() * 60 + ist.getUTCMinutes();
+  // Reject slots that are not on exact minute boundaries (seconds/millis must be zero).
+  if (startsAt.getUTCSeconds() !== 0 || startsAt.getUTCMilliseconds() !== 0) return null;
+  if (ist.getUTCSeconds() !== 0) return null;
+  const durMin = Math.round((endsAt.getTime() - startsAt.getTime()) / 60_000);
+  for (const r of rules) {
+    if (r.dayOfWeek !== dow) continue;
+    const s = timeToMinutes(r.startTime);
+    const e = timeToMinutes(r.endTime);
+    const len = r.slotMinutes ?? 20;
+    if (durMin !== len) continue;
+    if (mins < s || mins + durMin > e) continue;
+    // Strict grid alignment: offset from rule start must be a multiple of slotMinutes.
+    if ((mins - s) % len !== 0) continue;
+    return r;
+  }
+  return null;
+}
+
+/** Pure: strict slot-grid alignment check (09:00/09:20/09:40 for 20-min rules, etc). */
+export function isSlotAligned(startsAt: Date, endsAt: Date, rules: RuleLike[]): boolean {
+  return findCoveringRule(startsAt, endsAt, rules) !== null;
+}
+
 export function isSlotCovered(
   startsAt: Date,
   endsAt: Date,
@@ -90,7 +117,12 @@ export function isSlotCovered(
     if (r.dayOfWeek !== dow) return false;
     const s = timeToMinutes(r.startTime);
     const e = timeToMinutes(r.endTime);
-    return mins >= s && mins + durMin <= e && durMin === (r.slotMinutes ?? 20);
+    const len = r.slotMinutes ?? 20;
+    if (durMin !== len) return false;
+    if (mins < s || mins + durMin > e) return false;
+    // Strict grid alignment.
+    if ((mins - s) % len !== 0) return false;
+    return true;
   });
   if (!inRule) return false;
   return !timeOffs.some((t) => overlaps(startsAt, endsAt, t.startsAt, t.endsAt));

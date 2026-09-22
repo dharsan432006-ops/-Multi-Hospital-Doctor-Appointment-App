@@ -6,6 +6,7 @@ import { prisma } from '../lib/prisma.js';
 import { parsePagination, pageResponse } from '../lib/pagination.js';
 import { ApiError } from '../lib/errors.js';
 import { writeAudit } from '../lib/audit.js';
+import { bookingLimiter } from '../middleware/rateLimit.js';
 import {
   bookAppointment,
   cancelAppointment,
@@ -24,7 +25,7 @@ const BookBody = z.object({
   idempotencyKey: z.string().max(100).optional(),
 });
 
-router.post('/', authenticate, requireRole('PATIENT'), validateBody(BookBody), async (req, res, next) => {
+router.post('/', authenticate, requireRole('PATIENT'), bookingLimiter, validateBody(BookBody), async (req, res, next) => {
   try {
     const patient = await prisma.patient.findUnique({ where: { userId: req.user!.id } });
     if (!patient) throw ApiError.notFound('PATIENT_PROFILE_MISSING', 'Patient profile not found');
@@ -47,12 +48,12 @@ router.post('/', authenticate, requireRole('PATIENT'), validateBody(BookBody), a
 });
 
 const ListQuery = z.object({
-  status: z.string().optional(),
-  hospitalId: z.string().optional(),
-  doctorId: z.string().optional(),
-  patientId: z.string().optional(),
-  from: z.string().optional(),
-  to: z.string().optional(),
+  status: z.enum(['PENDING', 'CONFIRMED', 'COMPLETED', 'NO_SHOW', 'CANCELLED']).optional(),
+  hospitalId: z.string().min(1).optional(),
+  doctorId: z.string().min(1).optional(),
+  patientId: z.string().min(1).optional(),
+  from: z.string().datetime().optional(),
+  to: z.string().datetime().optional(),
   page: z.string().optional(),
   pageSize: z.string().optional(),
 });
@@ -125,7 +126,7 @@ router.get('/:id', authenticate, async (req, res, next) => {
   }
 });
 
-router.patch('/:id/cancel', authenticate, validateBody(z.object({}).passthrough()), async (req, res, next) => {
+router.patch('/:id/cancel', authenticate, bookingLimiter, validateBody(z.object({}).passthrough()), async (req, res, next) => {
   try {
     const updated = await cancelAppointment({ appointmentId: req.params.id, actor: { id: req.user!.id, role: req.user!.role } });
     await writeAudit({ actorUserId: req.user!.id, action: 'APPOINTMENT_CANCEL', entityType: 'Appointment', entityId: updated.id, req });
@@ -138,6 +139,7 @@ router.patch('/:id/cancel', authenticate, validateBody(z.object({}).passthrough(
 router.patch(
   '/:id/reschedule',
   authenticate,
+  bookingLimiter,
   validateBody(z.object({ startsAt: z.string().datetime() })),
   async (req, res, next) => {
     try {
@@ -167,7 +169,11 @@ router.patch(
         const doc = await prisma.doctor.findFirst({ where: { userId: req.user!.id } });
         if (!doc || appt.doctorId !== doc.id) throw ApiError.forbidden('NOT_YOUR_APPOINTMENT', 'Not your appointment');
       }
-      const updated = await setAppointmentStatus({ appointmentId: req.params.id, status: req.body.status });
+      const updated = await setAppointmentStatus({
+        appointmentId: req.params.id,
+        status: req.body.status,
+        actor: { id: req.user!.id, role: req.user!.role },
+      });
       await writeAudit({ actorUserId: req.user!.id, action: `APPOINTMENT_${req.body.status}`, entityType: 'Appointment', entityId: updated.id, req });
       res.json({ data: updated });
     } catch (e) {
