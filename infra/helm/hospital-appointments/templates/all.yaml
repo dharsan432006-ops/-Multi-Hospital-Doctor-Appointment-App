@@ -31,11 +31,11 @@ spec:
           envFrom:
             - secretRef: { name: {{ .Values.api.existingSecret }} }
           livenessProbe:
-            httpGet: { path: /health, port: {{ .Values.api.port }} }
+            httpGet: { path: /api/health, port: {{ .Values.api.port }} }
             initialDelaySeconds: 20
             periodSeconds: 30
           readinessProbe:
-            httpGet: { path: /health, port: {{ .Values.api.port }} }
+            httpGet: { path: /api/health, port: {{ .Values.api.port }} }
             initialDelaySeconds: 10
             periodSeconds: 15
           securityContext:

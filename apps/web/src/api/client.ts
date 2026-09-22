@@ -1,14 +1,34 @@
-const BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+/** Normalize VITE_API_URL: strip trailing slashes so `${BASE}${path}` never doubles them. */
+function normalizeBase(raw: string | undefined): string {
+  const v = (raw ?? '/api').trim();
+  if (!v) return '/api';
+  return v.length > 1 ? v.replace(/\/+$/, '') : v;
+}
+
+export function getApiBase(): string {
+  return normalizeBase(import.meta.env.VITE_API_URL as string | undefined);
+}
+
+const BASE = getApiBase();
 
 export class ApiError extends Error {
   code: string;
   status: number;
   details?: unknown;
-  constructor(status: number, code: string, message: string, details?: unknown) {
+  /** Request URL (origin + path stripped of query secrets where possible). */
+  url: string;
+  /** Backend request/correlation id when the API provides one via headers. */
+  requestId?: string;
+  /** Response Content-Type (e.g. text/html vs application/json) for routing diagnostics. */
+  contentType?: string;
+  constructor(status: number, code: string, message: string, url: string, details?: unknown, requestId?: string, contentType?: string) {
     super(message);
     this.status = status;
     this.code = code;
+    this.url = url;
     this.details = details;
+    this.requestId = requestId;
+    this.contentType = contentType;
   }
 }
 
@@ -40,11 +60,38 @@ function safeParse(text: string): { data?: unknown; error?: { code: string; mess
   }
 }
 
+function getRequestId(res: Response): string | undefined {
+  return res.headers.get('x-request-id') ?? res.headers.get('x-correlation-id') ?? undefined;
+}
+
+/**
+ * Internal diagnostics only (browser devtools). Keeps the user-facing UI
+ * message clean while preserving status + content-type + URL + code for
+ * debugging (e.g. 200 text/html = SPA fallback/HTML page instead of API JSON).
+ * Never logs headers, bodies, tokens, or secrets.
+ */
+function logApiError(method: string, url: string, status: number, code: string, requestId?: string, contentType?: string): void {
+  try {
+    // eslint-disable-next-line no-console
+    console.error(`[api] ${method} ${url} -> ${status} ${contentType ?? '?'} ${code}${requestId ? ` (requestId=${requestId})` : ''}`);
+  } catch {
+    // logging must never break the app
+  }
+}
+
 /** Fetch wrapper: Bearer auth, one 401→refresh retry, consistent error shape. */
 export async function apiFetch<T>(path: string, opts: RequestInit = {}, retry = true): Promise<T> {
+  const method = (opts.method ?? 'GET').toUpperCase();
+  const url = `${BASE}${path}`;
   const headers: Record<string, string> = { 'Content-Type': 'application/json', ...(opts.headers as Record<string, string> | undefined) };
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
-  const res = await fetch(`${BASE}${path}`, { ...opts, headers, credentials: 'include' });
+  let res: Response;
+  try {
+    res = await fetch(url, { ...opts, headers, credentials: 'include' });
+  } catch {
+    logApiError(method, url, 0, 'NETWORK_ERROR');
+    throw new ApiError(0, 'NETWORK_ERROR', `Network request failed (${method} ${url})`, url);
+  }
   if (res.status === 401 && retry) {
     const next = await refreshToken();
     if (next) {
@@ -55,8 +102,19 @@ export async function apiFetch<T>(path: string, opts: RequestInit = {}, retry = 
   if (res.status === 204) return undefined as T;
   const text = await res.text();
   const json = safeParse(text) as { data?: T; error?: { code: string; message: string; details?: unknown } };
+  const requestId = getRequestId(res);
+  const contentType = res.headers.get('content-type') ?? undefined;
   if (!res.ok) {
-    throw new ApiError(res.status, json?.error?.code ?? 'REQUEST_FAILED', json?.error?.message ?? `Request failed (${res.status})`, json?.error?.details);
+    const code = json?.error?.code ?? 'REQUEST_FAILED';
+    const message = json?.error?.message ?? `Request failed (${res.status})`;
+    logApiError(method, url, res.status, code, requestId, contentType);
+    throw new ApiError(res.status, code, message, url, json?.error?.details, requestId, contentType);
+  }
+  // Same-origin misconfiguration (e.g. nginx serving index.html for /api/*)
+  // returns 200 HTML: surface it as an error instead of bad data.
+  if (json?.error?.code === 'BAD_RESPONSE') {
+    logApiError(method, url, res.status, 'BAD_RESPONSE', requestId, contentType);
+    throw new ApiError(502, 'BAD_RESPONSE', 'Server returned a non-JSON response', url, undefined, requestId, contentType);
   }
   return (json?.data ?? json) as T;
 }
@@ -72,9 +130,17 @@ export interface PageEnvelope<T> {
  * breaks list pages — use this for every endpoint built with `pageResponse`.
  */
 export async function apiFetchPage<T>(path: string, opts: RequestInit = {}, retry = true): Promise<PageEnvelope<T>> {
+  const method = (opts.method ?? 'GET').toUpperCase();
+  const url = `${BASE}${path}`;
   const headers: Record<string, string> = { 'Content-Type': 'application/json', ...(opts.headers as Record<string, string> | undefined) };
   if (accessToken) headers.Authorization = `Bearer ${accessToken}`;
-  const res = await fetch(`${BASE}${path}`, { ...opts, headers, credentials: 'include' });
+  let res: Response;
+  try {
+    res = await fetch(url, { ...opts, headers, credentials: 'include' });
+  } catch {
+    logApiError(method, url, 0, 'NETWORK_ERROR');
+    throw new ApiError(0, 'NETWORK_ERROR', `Network request failed (${method} ${url})`, url);
+  }
   if (res.status === 401 && retry) {
     const next = await refreshToken();
     if (next) {
@@ -84,11 +150,22 @@ export async function apiFetchPage<T>(path: string, opts: RequestInit = {}, retr
   }
   const text = await res.text();
   const json = safeParse(text) as { data?: T[]; pagination?: PageEnvelope<T>['pagination']; error?: { code: string; message: string; details?: unknown } };
+  const requestId = getRequestId(res);
+  const contentType = res.headers.get('content-type') ?? undefined;
   if (!res.ok) {
-    throw new ApiError(res.status, json?.error?.code ?? 'REQUEST_FAILED', json?.error?.message ?? `Request failed (${res.status})`, json?.error?.details);
+    const code = json?.error?.code ?? 'REQUEST_FAILED';
+    const message = json?.error?.message ?? `Request failed (${res.status})`;
+    logApiError(method, url, res.status, code, requestId, contentType);
+    throw new ApiError(res.status, code, message, url, json?.error?.details, requestId, contentType);
   }
   if (!Array.isArray(json?.data) || !json?.pagination) {
-    throw new ApiError(502, 'BAD_ENVELOPE', 'Expected paginated { data, pagination } response');
+    const code = json?.error?.code === 'BAD_RESPONSE' ? 'BAD_RESPONSE' : 'BAD_ENVELOPE';
+    const message =
+      code === 'BAD_RESPONSE'
+        ? 'Server returned a non-JSON response'
+        : 'Expected paginated { data, pagination } response';
+    logApiError(method, url, 502, code, requestId, contentType);
+    throw new ApiError(502, code, message, url, undefined, requestId, contentType);
   }
   return json as PageEnvelope<T>;
 }

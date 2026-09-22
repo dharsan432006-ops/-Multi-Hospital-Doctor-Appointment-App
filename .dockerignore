@@ -1,0 +1,21 @@
+# Root build context exclusions (keeps `docker build`/`compose build` fast and
+# avoids sending host-only artifacts; Dockerfiles COPY only what they need).
+node_modules/
+apps/*/node_modules/
+apps/*/dist/
+dist/
+build/
+.git/
+.github/
+.vscode/
+.idea/
+test-results/
+playwright-report/
+e2e/
+*.log
+npm-debug.log*
+.terraform/
+*.tfstate
+*.tfstate.*
+.DS_Store
+Thumbs.db

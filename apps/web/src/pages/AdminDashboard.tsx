@@ -3,7 +3,7 @@ import { Alert, Box, Button, Card, CardContent, MenuItem, Stack, Tab, Tabs, Text
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { apiFetch, apiFetchPage } from '../api/client.js';
+import { apiFetch, apiFetchPage, getApiBase } from '../api/client.js';
 import { UnverifiedBadge, DemoBadge } from '../components/Badges.js';
 import { Empty, Loading, LoadError } from '../components/States.js';
 import type { Doctor, Hospital } from '../api/types.js';
@@ -59,7 +59,7 @@ export function AdminDashboard() {
       // Same auth flow as apiFetch (Bearer + httpOnly refresh cookie), requesting a blob.
       const doFetch = async (): Promise<Response> => {
         const { getAccessToken } = await import('../api/client.js');
-        const base = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+        const base = getApiBase();
         return fetch(`${base}/admin/reports/bookings?format=csv&pageSize=200`, {
           headers: { Authorization: `Bearer ${getAccessToken() ?? ''}` },
           credentials: 'include',
@@ -67,7 +67,7 @@ export function AdminDashboard() {
       };
       let res = await doFetch();
       if (res.status === 401) {
-        const base = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+        const base = getApiBase();
         const r = await fetch(`${base}/auth/refresh`, { method: 'POST', credentials: 'include' });
         if (r.ok) {
           const j = (await r.json()) as { data?: { accessToken?: string } };

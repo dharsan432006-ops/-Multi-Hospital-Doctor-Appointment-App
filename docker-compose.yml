@@ -68,7 +68,12 @@ services:
       context: .
       dockerfile: ./apps/web/Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL:-http://localhost:4000/api}
+        # Same-origin default: browser calls /api/* on the web origin and
+        # nginx proxies to the api service. This avoids localhost-in-browser
+        # failures when the stack is accessed via a remote host/IP.
+        # For local `vite dev` (no docker), .env keeps VITE_API_URL=http://localhost:4000/api.
+        # For separate-domain prod, set VITE_API_URL=https://<api-host>/api in the environment.
+        VITE_API_URL: ${VITE_API_URL:-/api}
     restart: unless-stopped
     depends_on:
       api:

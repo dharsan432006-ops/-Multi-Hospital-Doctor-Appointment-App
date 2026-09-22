@@ -15,7 +15,7 @@ export function DoctorList() {
   const [language, setLanguage] = useState(sp.get('language') ?? '');
   const [q, setQ] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError, refetch } = useDoctors({ specialty, hospital, department, language, q, page, pageSize: 10 });
+  const { data, isLoading, isError, error, refetch } = useDoctors({ specialty, hospital, department, language, q, page, pageSize: 10 });
 
   const bind = (setter: (v: string) => void, key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setter(e.target.value); setPage(1);
@@ -35,7 +35,7 @@ export function DoctorList() {
         <TextField label={t('doctors.keywords')} value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} fullWidth />
       </Stack>
       {isLoading && <Loading />}
-      {isError && <LoadError message="Failed to load" onRetry={() => void refetch()} />}
+      {isError && <LoadError message="Failed to load" error={error} onRetry={() => void refetch()} />}
       {data && data.data.length === 0 && <Empty />}
       <Stack spacing={2}>
         {data?.data.map((d) => <DoctorCard key={d.id} doctor={d} />)}

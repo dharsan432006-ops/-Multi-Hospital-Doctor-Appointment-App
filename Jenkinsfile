@@ -28,7 +28,11 @@ pipeline {
     stage('Build images') {
       steps {
         sh 'docker build -f apps/api/Dockerfile -t hospital-api:$BUILD_NUMBER .'
-        sh 'docker build -f apps/web/Dockerfile --build-arg VITE_API_URL=$VITE_API_URL -t hospital-web:$BUILD_NUMBER .'
+        // VITE_API_URL is baked at build time. For same-origin nginx deploys
+        // leave it as /api (Dockerfile default). For separate API hosts pass
+        // an absolute URL with /api suffix, e.g. VITE_API_URL=https://api.<prod>/api.
+        // Jenkins env VITE_API_URL must already include the /api suffix when set.
+        sh 'docker build -f apps/web/Dockerfile --build-arg VITE_API_URL=${VITE_API_URL:-/api} -t hospital-web:$BUILD_NUMBER .'
       }
     }
     stage('Deploy (Helm)') {
@@ -39,7 +43,10 @@ pipeline {
     }
     stage('Smoke') {
       when { branch 'main' }
-      steps { sh 'curl -sf $SMOKE_API_URL/health | grep -q ok' }
+      // Check BOTH the shallow web/API liveness (/health) and the deep
+      // dependency check (/api/health: postgres + redis). A 200 on /health
+      // alone must not count as healthy when the DB is down.
+      steps { sh 'curl -sf $SMOKE_API_URL/health | grep -q ok; curl -sf $SMOKE_API_URL/api/health | grep -q ok' }
     }
   }
   post {

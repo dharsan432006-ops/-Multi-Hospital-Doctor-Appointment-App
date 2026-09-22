@@ -1,7 +1,13 @@
 # syntax=docker/dockerfile:1
 # Production web image. Build from REPO ROOT:
-#   docker build -f apps/web/Dockerfile -t hospital-web --build-arg VITE_API_URL=https://api.example.com/api .
-ARG VITE_API_URL=http://localhost:4000/api
+#   Same-origin (docker-compose + nginx /api proxy, RECOMMENDED):
+#     docker build -f apps/web/Dockerfile -t hospital-web .
+#     (defaults to VITE_API_URL=/api, proxied by nginx to the api service)
+#   Separate API host (Helm/Terraform, absolute URL REQUIRED):
+#     docker build -f apps/web/Dockerfile -t hospital-web --build-arg VITE_API_URL=https://api.example.com/api .
+#   Local dev uses .env VITE_API_URL=http://localhost:4000/api (see vite.config.ts proxy).
+# NOTE: Vite inlines VITE_* at BUILD time — rebuilding is required after changing it.
+ARG VITE_API_URL=/api
 FROM node:20-alpine AS build
 WORKDIR /app
 ARG VITE_API_URL

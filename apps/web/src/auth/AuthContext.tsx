@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
-import { apiFetch, setAccessToken } from '../api/client.js';
+import { apiFetch, getApiBase, setAccessToken } from '../api/client.js';
 import type { AuthUser } from '../api/types.js';
 
 interface AuthState {
@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Try silent refresh on boot (refresh cookie is httpOnly).
     (async () => {
       try {
-        const res = await fetch(`${(import.meta.env.VITE_API_URL as string | undefined) ?? '/api'}/auth/refresh`, {
+        const res = await fetch(`${getApiBase()}/auth/refresh`, {
           method: 'POST',
           credentials: 'include',
         });

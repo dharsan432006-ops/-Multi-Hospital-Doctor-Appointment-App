@@ -52,7 +52,15 @@ jobs:
           file: ./apps/web/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository }}-web:${{ steps.meta.outputs.tag }},ghcr.io/${{ github.repository }}-web:latest
-          build-args: VITE_API_URL=${{ secrets.PROD_API_URL }}
+          # VITE_* is baked at build time. PROD_API_URL must be the bare API
+          # origin WITHOUT a trailing slash or /api suffix (e.g.
+          # https://api.example.in) — smoke tests use it as
+          # $BASE/health and $BASE/api/health. The frontend needs the /api
+          # prefix appended (frontend calls $BASE/api/hospitals).
+          # NOTE: this single image bakes the PROD API origin; staging
+          # frontends must build a separate image with STAGING_API_URL, or
+          # serve the web via same-origin nginx /api proxy with VITE_API_URL=/api.
+          build-args: VITE_API_URL=${{ secrets.PROD_API_URL }}/api
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

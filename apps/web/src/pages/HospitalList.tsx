@@ -12,7 +12,7 @@ export function HospitalList() {
   const [emergency, setEmergency] = useState(false);
   const [type, setType] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError, refetch } = useHospitals({ q, accreditation, emergency: emergency ? 'true' : undefined, type, page, pageSize: 10 });
+  const { data, isLoading, isError, error, refetch } = useHospitals({ q, accreditation, emergency: emergency ? 'true' : undefined, type, page, pageSize: 10 });
 
   return (
     <Box>
@@ -32,7 +32,7 @@ export function HospitalList() {
         <FormControlLabel control={<Checkbox checked={emergency} onChange={(e) => { setEmergency(e.target.checked); setPage(1); }} />} label={t('hospitals.emergencyOnly')} />
       </Stack>
       {isLoading && <Loading />}
-      {isError && <LoadError message="Failed to load" onRetry={() => void refetch()} />}
+      {isError && <LoadError message="Failed to load" error={error} onRetry={() => void refetch()} />}
       {data && data.data.length === 0 && <Empty />}
       <Stack spacing={2}>
         {data?.data.map((h) => <HospitalCard key={h.id} hospital={h} />)}
