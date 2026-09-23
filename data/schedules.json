@@ -1,0 +1,2402 @@
+[
+  {
+    "doctor_id": "doctor_001",
+    "hospital_id": "hospital_001",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_002",
+    "hospital_id": "hospital_001",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_003",
+    "hospital_id": "hospital_001",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_004",
+    "hospital_id": "hospital_001",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_005",
+    "hospital_id": "hospital_001",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_006",
+    "hospital_id": "hospital_002",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_007",
+    "hospital_id": "hospital_002",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_008",
+    "hospital_id": "hospital_002",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_009",
+    "hospital_id": "hospital_002",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_010",
+    "hospital_id": "hospital_002",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_011",
+    "hospital_id": "hospital_003",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_012",
+    "hospital_id": "hospital_003",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_013",
+    "hospital_id": "hospital_003",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_014",
+    "hospital_id": "hospital_003",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_015",
+    "hospital_id": "hospital_003",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_016",
+    "hospital_id": "hospital_004",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_017",
+    "hospital_id": "hospital_004",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_018",
+    "hospital_id": "hospital_004",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_019",
+    "hospital_id": "hospital_004",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_020",
+    "hospital_id": "hospital_004",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_021",
+    "hospital_id": "hospital_005",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_022",
+    "hospital_id": "hospital_005",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_023",
+    "hospital_id": "hospital_005",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_024",
+    "hospital_id": "hospital_005",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_025",
+    "hospital_id": "hospital_005",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_026",
+    "hospital_id": "hospital_006",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_027",
+    "hospital_id": "hospital_006",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_028",
+    "hospital_id": "hospital_006",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_029",
+    "hospital_id": "hospital_006",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_030",
+    "hospital_id": "hospital_006",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_031",
+    "hospital_id": "hospital_007",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_032",
+    "hospital_id": "hospital_007",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_033",
+    "hospital_id": "hospital_007",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_034",
+    "hospital_id": "hospital_007",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_035",
+    "hospital_id": "hospital_007",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_036",
+    "hospital_id": "hospital_008",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_037",
+    "hospital_id": "hospital_008",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_038",
+    "hospital_id": "hospital_008",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_039",
+    "hospital_id": "hospital_008",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_040",
+    "hospital_id": "hospital_008",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_041",
+    "hospital_id": "hospital_009",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_042",
+    "hospital_id": "hospital_009",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_043",
+    "hospital_id": "hospital_009",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_044",
+    "hospital_id": "hospital_009",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_045",
+    "hospital_id": "hospital_009",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_046",
+    "hospital_id": "hospital_010",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_047",
+    "hospital_id": "hospital_010",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_048",
+    "hospital_id": "hospital_010",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_049",
+    "hospital_id": "hospital_010",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_050",
+    "hospital_id": "hospital_010",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_051",
+    "hospital_id": "hospital_011",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_052",
+    "hospital_id": "hospital_011",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_053",
+    "hospital_id": "hospital_011",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_054",
+    "hospital_id": "hospital_011",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_055",
+    "hospital_id": "hospital_011",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_056",
+    "hospital_id": "hospital_012",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_057",
+    "hospital_id": "hospital_012",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_058",
+    "hospital_id": "hospital_012",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_059",
+    "hospital_id": "hospital_012",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_060",
+    "hospital_id": "hospital_012",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_061",
+    "hospital_id": "hospital_013",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_062",
+    "hospital_id": "hospital_013",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_063",
+    "hospital_id": "hospital_013",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_064",
+    "hospital_id": "hospital_013",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_065",
+    "hospital_id": "hospital_013",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_066",
+    "hospital_id": "hospital_014",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_067",
+    "hospital_id": "hospital_014",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_068",
+    "hospital_id": "hospital_014",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_069",
+    "hospital_id": "hospital_014",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_070",
+    "hospital_id": "hospital_014",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_071",
+    "hospital_id": "hospital_015",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_072",
+    "hospital_id": "hospital_015",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_073",
+    "hospital_id": "hospital_015",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_074",
+    "hospital_id": "hospital_015",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_075",
+    "hospital_id": "hospital_015",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_076",
+    "hospital_id": "hospital_016",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_077",
+    "hospital_id": "hospital_016",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_078",
+    "hospital_id": "hospital_016",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_079",
+    "hospital_id": "hospital_016",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_080",
+    "hospital_id": "hospital_016",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_081",
+    "hospital_id": "hospital_017",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_082",
+    "hospital_id": "hospital_017",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_083",
+    "hospital_id": "hospital_017",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_084",
+    "hospital_id": "hospital_017",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_085",
+    "hospital_id": "hospital_017",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_086",
+    "hospital_id": "hospital_018",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_087",
+    "hospital_id": "hospital_018",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_088",
+    "hospital_id": "hospital_018",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_089",
+    "hospital_id": "hospital_018",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_090",
+    "hospital_id": "hospital_018",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_091",
+    "hospital_id": "hospital_019",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_092",
+    "hospital_id": "hospital_019",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_093",
+    "hospital_id": "hospital_019",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_094",
+    "hospital_id": "hospital_019",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_095",
+    "hospital_id": "hospital_019",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_096",
+    "hospital_id": "hospital_020",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_097",
+    "hospital_id": "hospital_020",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_098",
+    "hospital_id": "hospital_020",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_099",
+    "hospital_id": "hospital_020",
+    "schedule": [
+      {
+        "day": "Tuesday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Thursday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  },
+  {
+    "doctor_id": "doctor_100",
+    "hospital_id": "hospital_020",
+    "schedule": [
+      {
+        "day": "Monday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Wednesday",
+        "start_time": "14:00",
+        "end_time": "18:00",
+        "slot_duration_minutes": 15
+      },
+      {
+        "day": "Friday",
+        "start_time": "09:00",
+        "end_time": "13:00",
+        "slot_duration_minutes": 15
+      }
+    ]
+  }
+]

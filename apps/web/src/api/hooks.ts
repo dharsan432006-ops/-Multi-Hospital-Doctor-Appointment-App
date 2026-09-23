@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiFetch, apiFetchPage, newIdempotencyKey } from './client.js';
-import type { Appointment, Consent, Doctor, Hospital, Slot } from './types.js';
+import type { Appointment, Consent, Doctor, Hospital, PatientMedicalProfile, Slot } from './types.js';
 
 export function useHospitals(params: Record<string, string | number | undefined>) {
   const qs = new URLSearchParams();
@@ -82,5 +82,36 @@ export function useSetConsent() {
         ? apiFetch(`/consents/${v.purpose}`, { method: 'DELETE' })
         : apiFetch('/consents', { method: 'POST', body: JSON.stringify({ purpose: v.purpose }) }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['consents'] }),
+  });
+}
+
+export function useMedicalRecords() {
+  return useQuery({
+    queryKey: ['medicalRecords'],
+    queryFn: () => apiFetch<PatientMedicalProfile>('/patient/medical-records'),
+  });
+}
+
+export function useAddAllergy() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (allergy: any) =>
+      apiFetch('/patient/allergies', {
+        method: 'POST',
+        body: JSON.stringify(allergy),
+      }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['medicalRecords'] }),
+  });
+}
+
+export function useAddVaccination() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (vac: any) =>
+      apiFetch('/patient/vaccinations', {
+        method: 'POST',
+        body: JSON.stringify(vac),
+      }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['medicalRecords'] }),
   });
 }

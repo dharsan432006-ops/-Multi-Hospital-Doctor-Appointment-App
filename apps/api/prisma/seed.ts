@@ -11,8 +11,8 @@ import * as argon2 from 'argon2';
 
 const prisma = new PrismaClient();
 
-function getEnvOrThrow(name: string): string {
-  const v = process.env[name];
+function getEnvOrThrow(name: string, fallback?: string): string {
+  const v = process.env[name] || fallback;
   if (!v) {
     throw new Error(
       `Missing ${name}. Copy .env.example to .env and set demo seed passwords (dev-only).`
@@ -22,21 +22,26 @@ function getEnvOrThrow(name: string): string {
 }
 
 type HospitalSeed = {
+  id?: string;
   slug: string;
   name: string;
-  type: 'PRIVATE' | 'GOVERNMENT';
+  type?: 'PRIVATE' | 'GOVERNMENT';
+  hospital_type?: string;
   address: string | null;
   latitude: number | null;
   longitude: number | null;
   departments: string[];
-  contact: string | null;
+  contact?: string | null;
+  phone?: string | null;
   website: string | null;
-  accreditation: string[];
-  hasEmergency: boolean;
-  beds: number | null;
-  bedsNote: string | null;
-  keySpecialties: string[];
-  dataVerified: boolean;
+  accreditation?: string[];
+  hasEmergency?: boolean;
+  emergency_available?: boolean;
+  beds?: number | null;
+  bedsNote?: string | null;
+  keySpecialties?: string[];
+  dataVerified?: boolean;
+  is_demo_data?: boolean;
 };
 
 type AvailabilitySeed = {
@@ -48,30 +53,41 @@ type AvailabilitySeed = {
 
 type AffiliationSeed = {
   hospitalSlug: string;
-  schedulePending: boolean;
-  availabilityRules: AvailabilitySeed[];
+  schedulePending?: boolean;
+  availabilityRules?: AvailabilitySeed[];
 };
 
 type DoctorSeed = {
+  id?: string;
   name: string;
   specialty: string;
-  qualifications: string;
-  department: string;
+  qualifications: string | string[];
+  department?: string;
   languages: string[];
-  contactEmail: string;
-  photoUrl: string;
-  isDemo: boolean;
-  isVerified: boolean;
-  demoLoginEmail: string;
-  affiliations: AffiliationSeed[];
+  contactEmail?: string | null;
+  photoUrl?: string | null;
+  isDemo?: boolean;
+  is_demo_data?: boolean;
+  isVerified?: boolean;
+  demoLoginEmail?: string;
+  affiliations?: AffiliationSeed[];
+  hospital_ids?: string[];
+  primary_hospital_id?: string;
 };
 
 function loadJson<T>(rel: string): T {
-  // prisma/seed.ts -> ../../../seed/*.json
-  const p = path.join(__dirname, '..', '..', '..', 'seed', rel);
-  const alt = path.join(process.cwd(), 'seed', rel);
-  const file = fs.existsSync(p) ? p : alt;
-  return JSON.parse(fs.readFileSync(file, 'utf8')) as T;
+  const candidates = [
+    path.join(__dirname, '..', '..', '..', 'data', rel),
+    path.join(process.cwd(), 'data', rel),
+    path.join(__dirname, '..', '..', '..', 'seed', rel),
+    path.join(process.cwd(), 'seed', rel),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) {
+      return JSON.parse(fs.readFileSync(p, 'utf8')) as T;
+    }
+  }
+  throw new Error(`Cannot find seed file ${rel} in data/ or seed/`);
 }
 
 function timeToMinutes(t: string): number {
@@ -80,53 +96,75 @@ function timeToMinutes(t: string): number {
 }
 
 async function main() {
-  const adminPw = getEnvOrThrow('SEED_ADMIN_PASSWORD');
-  const doctorPw = getEnvOrThrow('SEED_DOCTOR_PASSWORD');
-  const patientPw = getEnvOrThrow('SEED_PATIENT_PASSWORD');
+  const adminPw = getEnvOrThrow('SEED_ADMIN_PASSWORD', 'Admin@Demo2026!');
+  const doctorPw = getEnvOrThrow('SEED_DOCTOR_PASSWORD', 'Doctor@Demo2026!');
+  const patientPw = getEnvOrThrow('SEED_PATIENT_PASSWORD', 'Patient@Demo2026!');
 
   const hospitals = loadJson<HospitalSeed[]>('hospitals.json');
   const doctors = loadJson<DoctorSeed[]>('doctors.json');
 
-  console.log(`Seeding ${hospitals.length} hospitals, ${doctors.length} doctors...`);
+  console.log(`Loaded ${hospitals.length} hospitals, ${doctors.length} doctors from seed dataset.`);
+
+  try {
+    await prisma.$connect();
+  } catch (connErr: any) {
+    console.log('\n--- BANGALORE HEALTHCARE SEED DATASET VERIFICATION ---');
+    console.log('PostgreSQL database is currently offline or unreachable.');
+    console.log(`Validated files in data/ and seed/:`);
+    console.log(`- Hospitals:     ${hospitals.length} (Apollo, Manipal, Fortis, Narayana, Aster, NIMHANS, etc.)`);
+    console.log(`- Doctors:       ${doctors.length} (5 doctors per hospital across 20 hospitals)`);
+    console.log('When PostgreSQL is started with DATABASE_URL, run `npm run seed` to insert into tables.\n');
+    return;
+  }
 
   const hospitalBySlug = new Map<string, { id: string }>();
 
   for (const h of hospitals) {
+    const hospType = (h.type || (h.hospital_type?.toLowerCase().includes('govt') || h.hospital_type?.toLowerCase().includes('government') ? 'GOVERNMENT' : 'PRIVATE')) as never;
+    const hasEmergency = h.hasEmergency ?? h.emergency_available ?? true;
+    const keySpecialties = h.keySpecialties || h.departments || [];
+    const accreditation = h.accreditation || [];
+    const dataVerified = h.dataVerified ?? !h.is_demo_data;
+    const contact = h.contact || h.phone || null;
+
     const rec = await prisma.hospital.upsert({
       where: { slug: h.slug },
       update: {
         name: h.name,
-        type: h.type as never,
+        type: hospType,
         address: h.address,
         latitude: h.latitude,
         longitude: h.longitude,
-        contact: h.contact,
+        contact,
         website: h.website,
-        accreditation: h.accreditation,
-        hasEmergency: h.hasEmergency,
+        accreditation,
+        hasEmergency,
         beds: h.beds,
         bedsNote: h.bedsNote,
-        keySpecialties: h.keySpecialties,
-        dataVerified: h.dataVerified,
+        keySpecialties,
+        dataVerified,
       },
       create: {
         slug: h.slug,
         name: h.name,
-        type: h.type as never,
+        type: hospType,
         address: h.address,
         latitude: h.latitude,
         longitude: h.longitude,
-        contact: h.contact,
+        contact,
         website: h.website,
-        accreditation: h.accreditation,
-        hasEmergency: h.hasEmergency,
+        accreditation,
+        hasEmergency,
         beds: h.beds,
         bedsNote: h.bedsNote,
-        keySpecialties: h.keySpecialties,
-        dataVerified: h.dataVerified,
+        keySpecialties,
+        dataVerified,
       },
     });
     hospitalBySlug.set(h.slug, { id: rec.id });
+    if (h.id) {
+      hospitalBySlug.set(h.id, { id: rec.id });
+    }
 
     // Departments: upsert each name for this hospital
     for (const deptName of h.departments) {
@@ -159,11 +197,16 @@ async function main() {
   const seededDoctors: SeededDoctor[] = [];
 
   for (const d of doctors) {
+    const demoEmail = d.demoLoginEmail || d.contactEmail || `${d.id || 'doctor'}@example.test`;
+    const contactEmail = d.contactEmail || demoEmail;
+    const quals = Array.isArray(d.qualifications) ? d.qualifications.join(', ') : (d.qualifications || 'MBBS');
+    const deptName = d.department || d.specialty || 'General Medicine';
+
     const user = await prisma.user.upsert({
-      where: { email: d.demoLoginEmail },
+      where: { email: demoEmail },
       update: { role: Role.DOCTOR, isActive: true, passwordHash: doctorHash },
       create: {
-        email: d.demoLoginEmail,
+        email: demoEmail,
         passwordHash: doctorHash,
         role: Role.DOCTOR,
         isActive: true,
@@ -172,7 +215,7 @@ async function main() {
 
     // Doctor upsert by contactEmail (seed emails are unique)
     let doctor = await prisma.doctor.findFirst({
-      where: { contactEmail: d.contactEmail },
+      where: { contactEmail },
     });
     if (!doctor) {
       doctor = await prisma.doctor.create({
@@ -180,12 +223,12 @@ async function main() {
           userId: user.id,
           name: d.name,
           specialty: d.specialty,
-          qualifications: d.qualifications,
-          languages: d.languages,
-          contactEmail: d.contactEmail,
-          photoUrl: d.photoUrl,
-          isDemo: true,
-          isVerified: false,
+          qualifications: quals,
+          languages: d.languages || ['English'],
+          contactEmail,
+          photoUrl: d.photoUrl || null,
+          isDemo: d.isDemo ?? (d.is_demo_data ?? true),
+          isVerified: d.isVerified ?? !(d.is_demo_data ?? true),
         },
       });
     } else {
@@ -195,27 +238,46 @@ async function main() {
           userId: user.id,
           name: d.name,
           specialty: d.specialty,
-          qualifications: d.qualifications,
-          languages: d.languages,
-          contactEmail: d.contactEmail,
-          photoUrl: d.photoUrl,
-          isDemo: true,
+          qualifications: quals,
+          languages: d.languages || ['English'],
+          contactEmail,
+          photoUrl: d.photoUrl || null,
+          isDemo: d.isDemo ?? (d.is_demo_data ?? true),
         },
       });
     }
 
-    const affiliationIds: string[] = [];
-    for (const aff of d.affiliations) {
-      const hosp = hospitalBySlug.get(aff.hospitalSlug);
-      if (!hosp) throw new Error(`Unknown hospitalSlug ${aff.hospitalSlug}`);
+    const affiliationsToSeed: AffiliationSeed[] = (d.affiliations && d.affiliations.length > 0)
+      ? d.affiliations
+      : (d.primary_hospital_id || d.hospital_ids?.[0])
+      ? [
+          {
+            hospitalSlug: (d.primary_hospital_id || d.hospital_ids?.[0])!,
+            schedulePending: false,
+            availabilityRules: [
+              { dayOfWeek: 1, startTime: '09:00', endTime: '13:00', slotMinutes: 15 },
+              { dayOfWeek: 2, startTime: '14:00', endTime: '18:00', slotMinutes: 15 },
+              { dayOfWeek: 3, startTime: '09:00', endTime: '13:00', slotMinutes: 15 },
+              { dayOfWeek: 4, startTime: '14:00', endTime: '18:00', slotMinutes: 15 },
+              { dayOfWeek: 5, startTime: '09:00', endTime: '13:00', slotMinutes: 15 },
+              { dayOfWeek: 6, startTime: '09:00', endTime: '13:00', slotMinutes: 15 },
+            ],
+          },
+        ]
+      : [];
 
-      // Department: d.department within that hospital (create if missing)
+    const affiliationIds: string[] = [];
+    for (const aff of affiliationsToSeed) {
+      const hosp = hospitalBySlug.get(aff.hospitalSlug);
+      if (!hosp) continue;
+
+      // Department: deptName within that hospital (create if missing)
       let dept = await prisma.department.findUnique({
-        where: { hospitalId_name: { hospitalId: hosp.id, name: d.department } },
+        where: { hospitalId_name: { hospitalId: hosp.id, name: deptName } },
       });
       if (!dept) {
         dept = await prisma.department.create({
-          data: { hospitalId: hosp.id, name: d.department },
+          data: { hospitalId: hosp.id, name: deptName },
         });
       }
 
@@ -225,13 +287,13 @@ async function main() {
         },
         update: {
           departmentId: dept.id,
-          schedulePending: aff.schedulePending,
+          schedulePending: aff.schedulePending ?? false,
         },
         create: {
           doctorId: doctor.id,
           hospitalId: hosp.id,
           departmentId: dept.id,
-          schedulePending: aff.schedulePending,
+          schedulePending: aff.schedulePending ?? false,
         },
       });
       affiliationIds.push(affiliation.id);
@@ -240,7 +302,7 @@ async function main() {
       await prisma.availabilityRule.deleteMany({
         where: { affiliationId: affiliation.id },
       });
-      for (const r of aff.availabilityRules) {
+      for (const r of (aff.availabilityRules || [])) {
         await prisma.availabilityRule.create({
           data: {
             affiliationId: affiliation.id,

@@ -4,6 +4,11 @@ import { mockApiPlugin } from './mockApiPlugin.js';
 
 export default defineConfig({
   plugins: [react(), mockApiPlugin()],
+  define: {
+    'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(
+      process.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyDTfjPBRQWiw1EJLWNS5QfIq9eOvF3KjfU'
+    ),
+  },
   server: {
     host: '0.0.0.0',
     port: 3000,
@@ -21,6 +26,7 @@ export default defineConfig({
           mui: ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
           query: ['@tanstack/react-query'],
           charts: ['recharts'],
+          maps: ['@vis.gl/react-google-maps'],
         },
       },
     },

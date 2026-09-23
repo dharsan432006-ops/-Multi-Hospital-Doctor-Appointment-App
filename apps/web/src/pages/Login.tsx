@@ -40,6 +40,36 @@ export function Login() {
           <Button component={RouterLink} to="/register">{t('auth.registerTitle')}</Button>
         </Stack>
       </form>
+
+      <Box sx={{ mt: 3, pt: 2, borderTop: 1, borderColor: 'divider' }}>
+        <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, display: 'block', mb: 1 }}>
+          Quick Demo Accounts:
+        </Typography>
+        <Stack spacing={1}>
+          <Button
+            variant="outlined"
+            size="small"
+            color="primary"
+            onClick={async () => {
+              await login('priya.kapoor@example.test', 'DoctorPass123!');
+              nav('/doctor', { replace: true });
+            }}
+          >
+            🩺 Quick Login as Doctor (Dr. Priya Kapoor)
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            color="inherit"
+            onClick={async () => {
+              await login('patient@example.test', 'PatientPass123!');
+              nav(loc.state?.from ?? '/bookings', { replace: true });
+            }}
+          >
+            👤 Quick Login as Patient
+          </Button>
+        </Stack>
+      </Box>
     </Box>
   );
 }

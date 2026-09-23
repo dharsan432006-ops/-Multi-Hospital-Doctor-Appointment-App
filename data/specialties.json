@@ -1,0 +1,417 @@
+[
+  {
+    "id": "specialty_001",
+    "slug": "general-medicine",
+    "name": "General Medicine",
+    "description": "Comprehensive adult primary care, acute illness management, and chronic disease prevention.",
+    "common_conditions": [
+      "Hypertension",
+      "Type 2 Diabetes",
+      "Viral fevers",
+      "Respiratory infections",
+      "Fatigue"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_002",
+    "slug": "cardiology",
+    "name": "Cardiology",
+    "description": "Diagnosis and medical management of heart diseases, vascular disorders, and cardiovascular prevention.",
+    "common_conditions": [
+      "Coronary Artery Disease",
+      "Heart Failure",
+      "Arrhythmia",
+      "Angina",
+      "Valvular Heart Disease"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_003",
+    "slug": "neurology",
+    "name": "Neurology",
+    "description": "Investigation and treatment of central, peripheral, and autonomic nervous system disorders.",
+    "common_conditions": [
+      "Stroke",
+      "Epilepsy",
+      "Migraine",
+      "Parkinson disease",
+      "Peripheral Neuropathy"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_004",
+    "slug": "neurosurgery",
+    "name": "Neurosurgery",
+    "description": "Surgical treatment of brain, spinal cord, spinal column, and peripheral nerves.",
+    "common_conditions": [
+      "Brain Tumors",
+      "Herniated Discs",
+      "Aneurysms",
+      "Spinal Cord Trauma",
+      "Hydrocephalus"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_005",
+    "slug": "orthopedics",
+    "name": "Orthopedics",
+    "description": "Preservation and restoration of the musculoskeletal system, joints, bones, ligaments, and tendons.",
+    "common_conditions": [
+      "Osteoarthritis",
+      "Knee Ligament Tears",
+      "Bone Fractures",
+      "Sciatica",
+      "Rotator Cuff Tear"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_006",
+    "slug": "pediatrics",
+    "name": "Pediatrics",
+    "description": "Medical care of infants, children, and adolescents from birth up to 18 years of age.",
+    "common_conditions": [
+      "Childhood Asthma",
+      "Vaccination",
+      "Developmental Delay",
+      "Gastroenteritis",
+      "Bronchiolitis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_007",
+    "slug": "dermatology",
+    "name": "Dermatology",
+    "description": "Medical and surgical management of disorders affecting skin, hair, and nails.",
+    "common_conditions": [
+      "Eczema",
+      "Psoriasis",
+      "Acne Vulgaris",
+      "Fungal Skin Infections",
+      "Alopecia"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_008",
+    "slug": "psychiatry",
+    "name": "Psychiatry",
+    "description": "Diagnosis, prevention, and treatment of mental, emotional, and behavioral disorders.",
+    "common_conditions": [
+      "Major Depressive Disorder",
+      "Generalized Anxiety",
+      "Bipolar Disorder",
+      "Schizophrenia",
+      "OCD"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_009",
+    "slug": "psychology",
+    "name": "Psychology",
+    "description": "Psychological assessment, psychotherapy, cognitive behavioral therapy, and counseling.",
+    "common_conditions": [
+      "Stress Management",
+      "Panic Attacks",
+      "Grief Counseling",
+      "Relationship Stress",
+      "Sleep Issues"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_010",
+    "slug": "gynecology",
+    "name": "Gynecology",
+    "description": "Medical and surgical care of the female reproductive system and breasts.",
+    "common_conditions": [
+      "PCOS",
+      "Endometriosis",
+      "Uterine Fibroids",
+      "Menstrual Irregularities",
+      "Pelvic Pain"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_011",
+    "slug": "obstetrics",
+    "name": "Obstetrics",
+    "description": "Comprehensive pregnancy, prenatal, childbirth, and postpartum maternal-fetal care.",
+    "common_conditions": [
+      "Antenatal Care",
+      "Gestational Diabetes",
+      "Preeclampsia",
+      "Twin Pregnancy",
+      "Postpartum Care"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_012",
+    "slug": "oncology",
+    "name": "Oncology",
+    "description": "Multidisciplinary diagnosis, chemotherapy, immunotherapy, and targeted treatment of cancer.",
+    "common_conditions": [
+      "Breast Cancer",
+      "Lung Cancer",
+      "Lymphoma",
+      "Colorectal Cancer",
+      "Leukemia"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_013",
+    "slug": "gastroenterology",
+    "name": "Gastroenterology",
+    "description": "Diagnosis and endoscopic management of digestive tract, liver, gallbladder, and pancreatic disorders.",
+    "common_conditions": [
+      "GERD",
+      "Irritable Bowel Syndrome",
+      "Fatty Liver Disease",
+      "Peptic Ulcers",
+      "Ulcerative Colitis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_014",
+    "slug": "nephrology",
+    "name": "Nephrology",
+    "description": "Medical care of kidney function, chronic kidney disease, dialysis, and kidney transplantation.",
+    "common_conditions": [
+      "Chronic Kidney Disease",
+      "Proteinuria",
+      "Glomerulonephritis",
+      "Dialysis Management",
+      "Electrolyte Imbalance"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_015",
+    "slug": "urology",
+    "name": "Urology",
+    "description": "Surgical and medical diseases of male and female urinary-tract system and male reproductive organs.",
+    "common_conditions": [
+      "Kidney Stones",
+      "Benign Prostatic Hyperplasia",
+      "Urinary Tract Infections",
+      "Urinary Incontinence"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_016",
+    "slug": "pulmonology",
+    "name": "Pulmonology",
+    "description": "Diagnosis and treatment of respiratory tract and lung diseases, sleep apnea, and allergy care.",
+    "common_conditions": [
+      "Bronchial Asthma",
+      "COPD",
+      "Pneumonia",
+      "Sleep Apnea",
+      "Interstitial Lung Disease"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_017",
+    "slug": "endocrinology",
+    "name": "Endocrinology",
+    "description": "Hormonal disorders, metabolic regulation, thyroid dysfunction, and complex diabetes management.",
+    "common_conditions": [
+      "Hypothyroidism",
+      "Hyperthyroidism",
+      "Uncontrolled Diabetes",
+      "Adrenal Disorders",
+      "Osteoporosis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_018",
+    "slug": "rheumatology",
+    "name": "Rheumatology",
+    "description": "Systemic autoimmune diseases, connective tissue disorders, and inflammatory arthritis.",
+    "common_conditions": [
+      "Rheumatoid Arthritis",
+      "Systemic Lupus Erythematosus",
+      "Ankylosing Spondylitis",
+      "Gout",
+      "Sjogren Syndrome"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_019",
+    "slug": "ophthalmology",
+    "name": "Ophthalmology",
+    "description": "Medical and microsurgical eye care, cataract surgery, glaucoma, and refractive corrections.",
+    "common_conditions": [
+      "Cataracts",
+      "Glaucoma",
+      "Diabetic Retinopathy",
+      "Refractive Errors",
+      "Dry Eye Syndrome"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_020",
+    "slug": "ent",
+    "name": "ENT",
+    "description": "Ear, Nose, Throat, head and neck surgery, sinus surgery, and hearing assessment.",
+    "common_conditions": [
+      "Chronic Sinusitis",
+      "Tonsillitis",
+      "Allergic Rhinitis",
+      "Hearing Loss",
+      "Deviated Septum"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_021",
+    "slug": "dentistry",
+    "name": "Dentistry",
+    "description": "Oral health, conservative dentistry, endodontics, prosthodontics, and dental hygiene.",
+    "common_conditions": [
+      "Dental Caries",
+      "Pulpitis",
+      "Gingivitis",
+      "Impacted Third Molars",
+      "Periodontitis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_022",
+    "slug": "general-surgery",
+    "name": "General Surgery",
+    "description": "Laparoscopic and open surgical procedures for abdominal organs, hernias, and soft tissues.",
+    "common_conditions": [
+      "Gallstones (Cholecystitis)",
+      "Appendicitis",
+      "Inguinal Hernia",
+      "Hemorrhoids",
+      "Skin Lesions"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_023",
+    "slug": "plastic-surgery",
+    "name": "Plastic Surgery",
+    "description": "Reconstructive surgery, wound care, microsurgery, burn management, and cosmetic procedures.",
+    "common_conditions": [
+      "Post-Trauma Reconstruction",
+      "Diabetic Foot Ulcers",
+      "Scar Revision",
+      "Burn Contractures"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_024",
+    "slug": "pediatric-surgery",
+    "name": "Pediatric Surgery",
+    "description": "Specialized surgical treatment for infants, children, and adolescents with congenital anomalies.",
+    "common_conditions": [
+      "Congenital Hernias",
+      "Intussusception",
+      "Hypospadias",
+      "Hirschsprung Disease",
+      "Undescended Testis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_025",
+    "slug": "neonatology",
+    "name": "Neonatology",
+    "description": "Intensive medical care of newborn infants, especially ill or premature newborns.",
+    "common_conditions": [
+      "Neonatal Jaundice",
+      "Prematurity Care",
+      "Respiratory Distress in Newborns",
+      "Neonatal Sepsis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_026",
+    "slug": "emergency-medicine",
+    "name": "Emergency Medicine",
+    "description": "Acute resuscitation, trauma stabilization, medical emergencies, and poison management.",
+    "common_conditions": [
+      "Acute Chest Pain",
+      "Polytrauma",
+      "Acute Stroke Presentation",
+      "Severe Allergic Reactions",
+      "Poisoning"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_027",
+    "slug": "critical-care",
+    "name": "Critical Care",
+    "description": "Intensive care management of patients with life-threatening medical conditions and organ failure.",
+    "common_conditions": [
+      "Septic Shock",
+      "ARDS",
+      "Multi-Organ Dysfunction",
+      "Post-Cardiac Arrest Care",
+      "Severe Sepsis"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_028",
+    "slug": "radiology",
+    "name": "Radiology",
+    "description": "Diagnostic medical imaging including MRI, CT, Ultrasound, X-Ray, and Image-guided Interventions.",
+    "common_conditions": [
+      "CT Angiography",
+      "MRI Brain/Spine",
+      "Abdominal Ultrasonography",
+      "Digital Mammography",
+      "Image Biopsy"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_029",
+    "slug": "anesthesiology",
+    "name": "Anesthesiology",
+    "description": "Perioperative care, general anesthesia, regional nerve blocks, and acute/chronic pain medicine.",
+    "common_conditions": [
+      "Pre-Anesthetic Evaluation",
+      "Postoperative Pain Management",
+      "Chronic Intractable Pain",
+      "Epidural Analgesia"
+    ],
+    "is_demo_data": false
+  },
+  {
+    "id": "specialty_030",
+    "slug": "physiotherapy",
+    "name": "Physiotherapy",
+    "description": "Musculoskeletal rehabilitation, neurological physical therapy, post-surgical mobility recovery.",
+    "common_conditions": [
+      "Frozen Shoulder",
+      "Post-TKR Rehabilitation",
+      "Post-Stroke Hemiplegia",
+      "Chronic Lower Back Pain"
+    ],
+    "is_demo_data": false
+  }
+]

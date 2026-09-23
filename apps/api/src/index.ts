@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { getConfig } from './config/config.js';
 import { createApp } from './app.js';
 import { startWorkers } from './jobs/queues.js';
+import { startReminderCron, stopReminderCron } from './services/reminderCron.service.js';
 
 const cfg = getConfig();
 const app = createApp();
@@ -13,8 +14,10 @@ if (process.env.NODE_ENV !== 'test') {
     console.log(`api listening on :${port} (docs at /api/docs)`);
   });
   startWorkers();
+  startReminderCron();
 
   const shutdown = () => {
+    stopReminderCron();
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   };

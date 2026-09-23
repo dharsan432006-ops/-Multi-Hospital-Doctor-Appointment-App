@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { Alert, Box, Button, Card, CardContent, Dialog, DialogActions, DialogTitle, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Card, CardContent, Dialog, DialogActions, DialogTitle, Stack, Typography, Tabs, Tab, Paper, Chip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useAvailability } from '../api/hooks.js';
-import { useCancelAppointment, useMyBookings, useRescheduleAppointment } from '../api/hooks.js';
+import { useAvailability, useCancelAppointment, useMyBookings, useRescheduleAppointment } from '../api/hooks.js';
 import { SlotPicker } from '../components/SlotPicker.js';
 import { Empty, Loading, LoadError } from '../components/States.js';
 import { formatIST } from '../api/client.js';
+import { MedicalRecordsTimeline } from '../components/MedicalRecordsTimeline.js';
 import type { Appointment, Slot } from '../api/types.js';
 
 export function MyBookings() {
   const { t } = useTranslation();
+  const [sectionTab, setSectionTab] = useState<'appointments' | 'records'>('appointments');
   const { data, isLoading, isError, refetch } = useMyBookings();
   const cancel = useCancelAppointment();
   const reschedule = useRescheduleAppointment();
@@ -22,9 +23,6 @@ export function MyBookings() {
     resched?.doctorId,
     resched?.affiliation?.hospital.id
   );
-
-  if (isLoading) return <Loading />;
-  if (isError) return <LoadError message="Failed to load" onRetry={() => void refetch()} />;
 
   const doCancel = async () => {
     if (cancel.isPending) return;
@@ -53,27 +51,142 @@ export function MyBookings() {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>{t('nav.bookings')}</Typography>
-      {msg && <Alert severity="info" sx={{ mb: 1 }}>{msg}</Alert>}
-      {data && data.data.length === 0 && <Empty />}
-      <Stack spacing={2}>
-        {data?.data.map((a) => (
-          <Card key={a.id}>
-            <CardContent>
-              <Typography variant="h6">{a.doctor?.name} · {a.doctor?.specialty}</Typography>
-              <Typography>{a.affiliation?.hospital.name}</Typography>
-              <Typography>IST: {formatIST(a.startsAt)} – {formatIST(a.endsAt, { hour: '2-digit', minute: '2-digit', hour12: true })}</Typography>
-              <Typography variant="body2" color="text.secondary">{t('booking.statusLabel', { defaultValue: 'Status' })}: {a.status}</Typography>
-              {['PENDING', 'CONFIRMED'].includes(a.status) && (
-                <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-                  <Button size="small" color="error" onClick={() => { setMsg(''); setConfirmId(a.id); }}>{t('common.cancel')}</Button>
-                  <Button size="small" onClick={() => { setMsg(''); setResched(a); setPicked(null); }}>{t('booking.reschedule')}</Button>
-                </Stack>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </Stack>
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h4" sx={{ fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>
+          Patient Dashboard
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Manage your scheduled hospital consultations and access your complete digital medical history.
+        </Typography>
+      </Box>
+
+      {/* Primary Section Switcher */}
+      <Paper
+        elevation={0}
+        sx={{
+          mb: 3,
+          borderRadius: 2.5,
+          border: '1px solid #e2e8f0',
+          bgcolor: 'white',
+          p: 0.5,
+        }}
+      >
+        <Tabs
+          value={sectionTab}
+          onChange={(_, val) => setSectionTab(val)}
+          sx={{
+            '& .MuiTab-root': {
+              textTransform: 'none',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              borderRadius: 2,
+              minHeight: 44,
+            },
+            '& .Mui-selected': {
+              bgcolor: '#eef2ff',
+              color: '#4f46e5 !important',
+            },
+          }}
+        >
+          <Tab
+            value="appointments"
+            label={`📅 Appointments & Bookings (${data?.data?.length || 0})`}
+          />
+          <Tab
+            value="records"
+            label="📋 Medical Records (Diagnoses, Allergies, Vaccines)"
+          />
+        </Tabs>
+      </Paper>
+
+      {sectionTab === 'records' ? (
+        <MedicalRecordsTimeline />
+      ) : (
+        <Box>
+          {msg && <Alert severity="info" sx={{ mb: 2 }}>{msg}</Alert>}
+          {isLoading && <Loading />}
+          {isError && <LoadError message="Failed to load appointments" onRetry={() => void refetch()} />}
+          {data && data.data.length === 0 && <Empty />}
+          <Stack spacing={2}>
+            {data?.data.map((a) => (
+              <Card
+                key={a.id}
+                elevation={0}
+                sx={{
+                  borderRadius: 2.5,
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+                  transition: 'border-color 0.15s ease',
+                  '&:hover': { borderColor: '#cbd5e1' },
+                }}
+              >
+                <CardContent sx={{ p: 2.5 }}>
+                  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', sm: 'center' }, mb: 1, gap: 1 }}>
+                    <Box>
+                      <Typography variant="h6" sx={{ fontWeight: 800, color: '#0f172a' }}>
+                        {a.doctor?.name} · <span style={{ color: '#4f46e5', fontWeight: 600 }}>{a.doctor?.specialty}</span>
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#475569' }}>
+                        🏥 {a.affiliation?.hospital.name}
+                      </Typography>
+                    </Box>
+                    <Chip
+                      label={a.status}
+                      size="small"
+                      sx={{
+                        fontWeight: 700,
+                        bgcolor:
+                          a.status === 'CONFIRMED'
+                            ? '#d1fae5'
+                            : a.status === 'COMPLETED'
+                            ? '#dbeafe'
+                            : a.status === 'CANCELLED'
+                            ? '#fee2e2'
+                            : '#fef3c7',
+                        color:
+                          a.status === 'CONFIRMED'
+                            ? '#065f46'
+                            : a.status === 'COMPLETED'
+                            ? '#1e40af'
+                            : a.status === 'CANCELLED'
+                            ? '#991b1b'
+                            : '#92400e',
+                      }}
+                    />
+                  </Box>
+
+                  <Typography variant="body2" sx={{ color: '#334155', mt: 1 }}>
+                    ⏰ IST: <strong>{formatIST(a.startsAt)}</strong> – {formatIST(a.endsAt, { hour: '2-digit', minute: '2-digit', hour12: true })}
+                  </Typography>
+
+                  {['PENDING', 'CONFIRMED'].includes(a.status) && (
+                    <Stack direction="row" spacing={1.5} sx={{ mt: 2 }}>
+                      <Button
+                        size="small"
+                        color="error"
+                        variant="outlined"
+                        onClick={() => { setMsg(''); setConfirmId(a.id); }}
+                        sx={{ borderRadius: 1.5, textTransform: 'none', fontWeight: 600 }}
+                      >
+                        {t('common.cancel')}
+                      </Button>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        onClick={() => { setMsg(''); setResched(a); setPicked(null); }}
+                        sx={{ borderRadius: 1.5, textTransform: 'none', fontWeight: 600, bgcolor: '#4f46e5' }}
+                      >
+                        {t('booking.reschedule')}
+                      </Button>
+                    </Stack>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </Stack>
+        </Box>
+      )}
+
       <Dialog open={!!confirmId} onClose={() => setConfirmId('')}>
         <DialogTitle>{t('booking.cancelTitle')}</DialogTitle>
         <DialogActions>

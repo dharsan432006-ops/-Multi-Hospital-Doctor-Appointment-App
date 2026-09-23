@@ -182,4 +182,49 @@ router.patch(
   }
 );
 
+// Trigger 24-hour appointment reminder cron scan manually
+router.post(
+  '/reminders/process-24h',
+  authenticate,
+  requireRole('DOCTOR', 'ADMIN'),
+  async (_req, res, next) => {
+    try {
+      const { process24HourAppointmentReminders } = await import('../services/reminderCron.service.js');
+      const result = await process24HourAppointmentReminders();
+      res.json({ data: result });
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
+// Fetch recent reminder notification logs
+router.get(
+  '/reminders/logs',
+  authenticate,
+  requireRole('DOCTOR', 'ADMIN'),
+  async (_req, res, next) => {
+    try {
+      const logs = await prisma.notificationLog.findMany({
+        where: {
+          type: { in: ['REMINDER_24H', 'REMINDER_2H'] },
+        },
+        include: {
+          appointment: {
+            include: {
+              patient: true,
+              doctor: true,
+            },
+          },
+        },
+        orderBy: { sentAt: 'desc' },
+        take: 50,
+      });
+      res.json({ data: logs });
+    } catch (e) {
+      next(e);
+    }
+  }
+);
+
 export default router;

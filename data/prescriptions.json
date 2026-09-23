@@ -1,0 +1,3242 @@
+[
+  {
+    "id": "prescription_001",
+    "appointment_id": "appointment_002",
+    "doctor_id": "doctor_004",
+    "patient_id": "patient_002",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_002",
+    "appointment_id": "appointment_003",
+    "doctor_id": "doctor_007",
+    "patient_id": "patient_003",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_003",
+    "appointment_id": "appointment_004",
+    "doctor_id": "doctor_010",
+    "patient_id": "patient_004",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_004",
+    "appointment_id": "appointment_005",
+    "doctor_id": "doctor_013",
+    "patient_id": "patient_005",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_005",
+    "appointment_id": "appointment_008",
+    "doctor_id": "doctor_022",
+    "patient_id": "patient_008",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_006",
+    "appointment_id": "appointment_009",
+    "doctor_id": "doctor_025",
+    "patient_id": "patient_009",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_007",
+    "appointment_id": "appointment_010",
+    "doctor_id": "doctor_028",
+    "patient_id": "patient_010",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_008",
+    "appointment_id": "appointment_011",
+    "doctor_id": "doctor_031",
+    "patient_id": "patient_011",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_009",
+    "appointment_id": "appointment_014",
+    "doctor_id": "doctor_040",
+    "patient_id": "patient_014",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_010",
+    "appointment_id": "appointment_015",
+    "doctor_id": "doctor_043",
+    "patient_id": "patient_015",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_011",
+    "appointment_id": "appointment_016",
+    "doctor_id": "doctor_046",
+    "patient_id": "patient_016",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_012",
+    "appointment_id": "appointment_017",
+    "doctor_id": "doctor_049",
+    "patient_id": "patient_017",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_013",
+    "appointment_id": "appointment_020",
+    "doctor_id": "doctor_058",
+    "patient_id": "patient_020",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_014",
+    "appointment_id": "appointment_021",
+    "doctor_id": "doctor_061",
+    "patient_id": "patient_021",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_015",
+    "appointment_id": "appointment_022",
+    "doctor_id": "doctor_064",
+    "patient_id": "patient_022",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_016",
+    "appointment_id": "appointment_023",
+    "doctor_id": "doctor_067",
+    "patient_id": "patient_023",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_017",
+    "appointment_id": "appointment_026",
+    "doctor_id": "doctor_076",
+    "patient_id": "patient_026",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_018",
+    "appointment_id": "appointment_027",
+    "doctor_id": "doctor_079",
+    "patient_id": "patient_027",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_019",
+    "appointment_id": "appointment_028",
+    "doctor_id": "doctor_082",
+    "patient_id": "patient_028",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_020",
+    "appointment_id": "appointment_029",
+    "doctor_id": "doctor_085",
+    "patient_id": "patient_029",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_021",
+    "appointment_id": "appointment_032",
+    "doctor_id": "doctor_094",
+    "patient_id": "patient_032",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_022",
+    "appointment_id": "appointment_033",
+    "doctor_id": "doctor_097",
+    "patient_id": "patient_033",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_023",
+    "appointment_id": "appointment_034",
+    "doctor_id": "doctor_100",
+    "patient_id": "patient_034",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-01T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_024",
+    "appointment_id": "appointment_035",
+    "doctor_id": "doctor_003",
+    "patient_id": "patient_035",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_025",
+    "appointment_id": "appointment_038",
+    "doctor_id": "doctor_012",
+    "patient_id": "patient_038",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_026",
+    "appointment_id": "appointment_039",
+    "doctor_id": "doctor_015",
+    "patient_id": "patient_039",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_027",
+    "appointment_id": "appointment_040",
+    "doctor_id": "doctor_018",
+    "patient_id": "patient_040",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_028",
+    "appointment_id": "appointment_041",
+    "doctor_id": "doctor_021",
+    "patient_id": "patient_041",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_029",
+    "appointment_id": "appointment_044",
+    "doctor_id": "doctor_030",
+    "patient_id": "patient_044",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_030",
+    "appointment_id": "appointment_045",
+    "doctor_id": "doctor_033",
+    "patient_id": "patient_045",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_031",
+    "appointment_id": "appointment_046",
+    "doctor_id": "doctor_036",
+    "patient_id": "patient_046",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_032",
+    "appointment_id": "appointment_047",
+    "doctor_id": "doctor_039",
+    "patient_id": "patient_047",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_033",
+    "appointment_id": "appointment_050",
+    "doctor_id": "doctor_048",
+    "patient_id": "patient_050",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_034",
+    "appointment_id": "appointment_051",
+    "doctor_id": "doctor_051",
+    "patient_id": "patient_051",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_035",
+    "appointment_id": "appointment_052",
+    "doctor_id": "doctor_054",
+    "patient_id": "patient_052",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_036",
+    "appointment_id": "appointment_053",
+    "doctor_id": "doctor_057",
+    "patient_id": "patient_053",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_037",
+    "appointment_id": "appointment_056",
+    "doctor_id": "doctor_066",
+    "patient_id": "patient_056",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_038",
+    "appointment_id": "appointment_057",
+    "doctor_id": "doctor_069",
+    "patient_id": "patient_057",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_039",
+    "appointment_id": "appointment_058",
+    "doctor_id": "doctor_072",
+    "patient_id": "patient_058",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_040",
+    "appointment_id": "appointment_059",
+    "doctor_id": "doctor_075",
+    "patient_id": "patient_059",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_041",
+    "appointment_id": "appointment_062",
+    "doctor_id": "doctor_084",
+    "patient_id": "patient_062",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_042",
+    "appointment_id": "appointment_063",
+    "doctor_id": "doctor_087",
+    "patient_id": "patient_063",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_043",
+    "appointment_id": "appointment_064",
+    "doctor_id": "doctor_090",
+    "patient_id": "patient_064",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_044",
+    "appointment_id": "appointment_065",
+    "doctor_id": "doctor_093",
+    "patient_id": "patient_065",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-02T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_045",
+    "appointment_id": "appointment_068",
+    "doctor_id": "doctor_002",
+    "patient_id": "patient_068",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_046",
+    "appointment_id": "appointment_069",
+    "doctor_id": "doctor_005",
+    "patient_id": "patient_069",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_047",
+    "appointment_id": "appointment_070",
+    "doctor_id": "doctor_008",
+    "patient_id": "patient_070",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_048",
+    "appointment_id": "appointment_071",
+    "doctor_id": "doctor_011",
+    "patient_id": "patient_071",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_049",
+    "appointment_id": "appointment_074",
+    "doctor_id": "doctor_020",
+    "patient_id": "patient_074",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_050",
+    "appointment_id": "appointment_075",
+    "doctor_id": "doctor_023",
+    "patient_id": "patient_075",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_051",
+    "appointment_id": "appointment_076",
+    "doctor_id": "doctor_026",
+    "patient_id": "patient_076",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_052",
+    "appointment_id": "appointment_077",
+    "doctor_id": "doctor_029",
+    "patient_id": "patient_077",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_053",
+    "appointment_id": "appointment_080",
+    "doctor_id": "doctor_038",
+    "patient_id": "patient_080",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_054",
+    "appointment_id": "appointment_081",
+    "doctor_id": "doctor_041",
+    "patient_id": "patient_081",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_055",
+    "appointment_id": "appointment_082",
+    "doctor_id": "doctor_044",
+    "patient_id": "patient_082",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_056",
+    "appointment_id": "appointment_083",
+    "doctor_id": "doctor_047",
+    "patient_id": "patient_083",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_057",
+    "appointment_id": "appointment_086",
+    "doctor_id": "doctor_056",
+    "patient_id": "patient_086",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_058",
+    "appointment_id": "appointment_087",
+    "doctor_id": "doctor_059",
+    "patient_id": "patient_087",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_059",
+    "appointment_id": "appointment_088",
+    "doctor_id": "doctor_062",
+    "patient_id": "patient_088",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_060",
+    "appointment_id": "appointment_089",
+    "doctor_id": "doctor_065",
+    "patient_id": "patient_089",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_061",
+    "appointment_id": "appointment_092",
+    "doctor_id": "doctor_074",
+    "patient_id": "patient_092",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_062",
+    "appointment_id": "appointment_093",
+    "doctor_id": "doctor_077",
+    "patient_id": "patient_093",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_063",
+    "appointment_id": "appointment_094",
+    "doctor_id": "doctor_080",
+    "patient_id": "patient_094",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_064",
+    "appointment_id": "appointment_095",
+    "doctor_id": "doctor_083",
+    "patient_id": "patient_095",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_065",
+    "appointment_id": "appointment_098",
+    "doctor_id": "doctor_092",
+    "patient_id": "patient_098",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_066",
+    "appointment_id": "appointment_099",
+    "doctor_id": "doctor_095",
+    "patient_id": "patient_099",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_067",
+    "appointment_id": "appointment_100",
+    "doctor_id": "doctor_098",
+    "patient_id": "patient_100",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-03T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_068",
+    "appointment_id": "appointment_101",
+    "doctor_id": "doctor_001",
+    "patient_id": "patient_101",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_069",
+    "appointment_id": "appointment_104",
+    "doctor_id": "doctor_010",
+    "patient_id": "patient_104",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_070",
+    "appointment_id": "appointment_105",
+    "doctor_id": "doctor_013",
+    "patient_id": "patient_105",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_071",
+    "appointment_id": "appointment_106",
+    "doctor_id": "doctor_016",
+    "patient_id": "patient_106",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_072",
+    "appointment_id": "appointment_107",
+    "doctor_id": "doctor_019",
+    "patient_id": "patient_107",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_073",
+    "appointment_id": "appointment_110",
+    "doctor_id": "doctor_028",
+    "patient_id": "patient_110",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_074",
+    "appointment_id": "appointment_111",
+    "doctor_id": "doctor_031",
+    "patient_id": "patient_111",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_075",
+    "appointment_id": "appointment_112",
+    "doctor_id": "doctor_034",
+    "patient_id": "patient_112",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_076",
+    "appointment_id": "appointment_113",
+    "doctor_id": "doctor_037",
+    "patient_id": "patient_113",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_077",
+    "appointment_id": "appointment_116",
+    "doctor_id": "doctor_046",
+    "patient_id": "patient_116",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_078",
+    "appointment_id": "appointment_117",
+    "doctor_id": "doctor_049",
+    "patient_id": "patient_117",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_079",
+    "appointment_id": "appointment_118",
+    "doctor_id": "doctor_052",
+    "patient_id": "patient_118",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_080",
+    "appointment_id": "appointment_119",
+    "doctor_id": "doctor_055",
+    "patient_id": "patient_119",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_081",
+    "appointment_id": "appointment_122",
+    "doctor_id": "doctor_064",
+    "patient_id": "patient_122",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_082",
+    "appointment_id": "appointment_123",
+    "doctor_id": "doctor_067",
+    "patient_id": "patient_123",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_083",
+    "appointment_id": "appointment_124",
+    "doctor_id": "doctor_070",
+    "patient_id": "patient_124",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_084",
+    "appointment_id": "appointment_125",
+    "doctor_id": "doctor_073",
+    "patient_id": "patient_125",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_085",
+    "appointment_id": "appointment_128",
+    "doctor_id": "doctor_082",
+    "patient_id": "patient_128",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_086",
+    "appointment_id": "appointment_129",
+    "doctor_id": "doctor_085",
+    "patient_id": "patient_129",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_087",
+    "appointment_id": "appointment_130",
+    "doctor_id": "doctor_088",
+    "patient_id": "patient_130",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_088",
+    "appointment_id": "appointment_131",
+    "doctor_id": "doctor_091",
+    "patient_id": "patient_131",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_089",
+    "appointment_id": "appointment_134",
+    "doctor_id": "doctor_100",
+    "patient_id": "patient_134",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-04T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_090",
+    "appointment_id": "appointment_135",
+    "doctor_id": "doctor_003",
+    "patient_id": "patient_135",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_091",
+    "appointment_id": "appointment_136",
+    "doctor_id": "doctor_006",
+    "patient_id": "patient_136",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_092",
+    "appointment_id": "appointment_137",
+    "doctor_id": "doctor_009",
+    "patient_id": "patient_137",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_093",
+    "appointment_id": "appointment_140",
+    "doctor_id": "doctor_018",
+    "patient_id": "patient_140",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_094",
+    "appointment_id": "appointment_141",
+    "doctor_id": "doctor_021",
+    "patient_id": "patient_141",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_095",
+    "appointment_id": "appointment_142",
+    "doctor_id": "doctor_024",
+    "patient_id": "patient_142",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_096",
+    "appointment_id": "appointment_143",
+    "doctor_id": "doctor_027",
+    "patient_id": "patient_143",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_097",
+    "appointment_id": "appointment_146",
+    "doctor_id": "doctor_036",
+    "patient_id": "patient_146",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_098",
+    "appointment_id": "appointment_147",
+    "doctor_id": "doctor_039",
+    "patient_id": "patient_147",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_099",
+    "appointment_id": "appointment_148",
+    "doctor_id": "doctor_042",
+    "patient_id": "patient_148",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_100",
+    "appointment_id": "appointment_149",
+    "doctor_id": "doctor_045",
+    "patient_id": "patient_149",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_101",
+    "appointment_id": "appointment_152",
+    "doctor_id": "doctor_054",
+    "patient_id": "patient_152",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_102",
+    "appointment_id": "appointment_153",
+    "doctor_id": "doctor_057",
+    "patient_id": "patient_153",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_103",
+    "appointment_id": "appointment_154",
+    "doctor_id": "doctor_060",
+    "patient_id": "patient_154",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_104",
+    "appointment_id": "appointment_155",
+    "doctor_id": "doctor_063",
+    "patient_id": "patient_155",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_105",
+    "appointment_id": "appointment_158",
+    "doctor_id": "doctor_072",
+    "patient_id": "patient_158",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_106",
+    "appointment_id": "appointment_159",
+    "doctor_id": "doctor_075",
+    "patient_id": "patient_159",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_107",
+    "appointment_id": "appointment_160",
+    "doctor_id": "doctor_078",
+    "patient_id": "patient_160",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_108",
+    "appointment_id": "appointment_161",
+    "doctor_id": "doctor_081",
+    "patient_id": "patient_161",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_109",
+    "appointment_id": "appointment_164",
+    "doctor_id": "doctor_090",
+    "patient_id": "patient_164",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_110",
+    "appointment_id": "appointment_165",
+    "doctor_id": "doctor_093",
+    "patient_id": "patient_165",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_111",
+    "appointment_id": "appointment_166",
+    "doctor_id": "doctor_096",
+    "patient_id": "patient_166",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_112",
+    "appointment_id": "appointment_167",
+    "doctor_id": "doctor_099",
+    "patient_id": "patient_167",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-05T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_113",
+    "appointment_id": "appointment_170",
+    "doctor_id": "doctor_008",
+    "patient_id": "patient_170",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_114",
+    "appointment_id": "appointment_171",
+    "doctor_id": "doctor_011",
+    "patient_id": "patient_171",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_115",
+    "appointment_id": "appointment_172",
+    "doctor_id": "doctor_014",
+    "patient_id": "patient_172",
+    "diagnosis": "Essential Hypertension (Stage 1)",
+    "medications": [
+      {
+        "name": "Amlodipine Besylate",
+        "dosage": "5 mg",
+        "frequency": "Once daily morning after breakfast",
+        "duration": "30 days"
+      },
+      {
+        "name": "Telmisartan",
+        "dosage": "40 mg",
+        "frequency": "Once daily morning",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Advised low sodium diet (<2g/day), 30 minutes daily aerobic walking, and weekly BP chart maintenance.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_116",
+    "appointment_id": "appointment_173",
+    "doctor_id": "doctor_017",
+    "patient_id": "patient_173",
+    "diagnosis": "Type 2 Diabetes Mellitus with Mild Hyperglycemia",
+    "medications": [
+      {
+        "name": "Metformin Hydrochloride (Extended Release)",
+        "dosage": "500 mg",
+        "frequency": "Twice daily with meals",
+        "duration": "30 days"
+      },
+      {
+        "name": "Vitamin B12 / Methylcobalamin",
+        "dosage": "1500 mcg",
+        "frequency": "Once daily",
+        "duration": "30 days"
+      }
+    ],
+    "notes": "Follow diabetic diet chart, record fasting & post-prandial blood sugar twice weekly, re-check HbA1c in 3 months.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_117",
+    "appointment_id": "appointment_176",
+    "doctor_id": "doctor_026",
+    "patient_id": "patient_176",
+    "diagnosis": "Acute Upper Respiratory Tract Infection & Bronchial Irritation",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Thrice daily after food as needed for fever/bodyache",
+        "duration": "5 days"
+      },
+      {
+        "name": "Cetirizine Hydrochloride",
+        "dosage": "10 mg",
+        "frequency": "Once daily at bedtime",
+        "duration": "5 days"
+      },
+      {
+        "name": "Montelukast Sodium",
+        "dosage": "10 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Steam inhalation twice daily, adequate oral hydration, avoid cold drinks. Return if fever persists beyond 3 days.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_118",
+    "appointment_id": "appointment_177",
+    "doctor_id": "doctor_029",
+    "patient_id": "patient_177",
+    "diagnosis": "Gastroesophageal Reflux Disease (GERD) & Acid Dyspepsia",
+    "medications": [
+      {
+        "name": "Pantoprazole Sodium Gastro-resistant",
+        "dosage": "40 mg",
+        "frequency": "Once daily 30 minutes before breakfast",
+        "duration": "14 days"
+      },
+      {
+        "name": "Domperidone",
+        "dosage": "10 mg",
+        "frequency": "Once daily before lunch",
+        "duration": "10 days"
+      },
+      {
+        "name": "Antacid Gel (Magaldrate + Simethicone)",
+        "dosage": "10 ml",
+        "frequency": "Post meals as needed",
+        "duration": "7 days"
+      }
+    ],
+    "notes": "Avoid spicy and oily foods, maintain 2-hour gap between dinner and sleeping, elevate head during sleep.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_119",
+    "appointment_id": "appointment_178",
+    "doctor_id": "doctor_032",
+    "patient_id": "patient_178",
+    "diagnosis": "Bilateral Primary Osteoarthritis Knee (Grade 2)",
+    "medications": [
+      {
+        "name": "Diacerein",
+        "dosage": "50 mg",
+        "frequency": "Once daily at night",
+        "duration": "30 days"
+      },
+      {
+        "name": "Paracetamol",
+        "dosage": "650 mg",
+        "frequency": "Twice daily post meals on days with acute pain",
+        "duration": "7 days"
+      },
+      {
+        "name": "Calcium Carbonate with Vitamin D3",
+        "dosage": "500 mg / 400 IU",
+        "frequency": "Once daily with lunch",
+        "duration": "60 days"
+      }
+    ],
+    "notes": "Quadriceps strengthening exercises advised, avoid squatting and sitting on the floor, apply local knee ice packs.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  },
+  {
+    "id": "prescription_120",
+    "appointment_id": "appointment_179",
+    "doctor_id": "doctor_035",
+    "patient_id": "patient_179",
+    "diagnosis": "Allergic Rhinitis & Seasonal Nasal Congestion",
+    "medications": [
+      {
+        "name": "Fluticasone Furoate Nasal Spray",
+        "dosage": "27.5 mcg/spray",
+        "frequency": "Two sprays per nostril once daily morning",
+        "duration": "30 days"
+      },
+      {
+        "name": "Levocetirizine",
+        "dosage": "5 mg",
+        "frequency": "Once daily at night",
+        "duration": "10 days"
+      }
+    ],
+    "notes": "Nasal saline douche prior to spray, minimize pollen and dust exposure, use protective face mask outdoors.",
+    "created_at": "2026-09-06T09:15:00Z",
+    "is_demo_data": true
+  }
+]
