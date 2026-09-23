@@ -176,6 +176,20 @@ resource "aws_cloudfront_distribution" "web" {
     origin_id                = "web"
     origin_access_control_id = aws_cloudfront_origin_access_control.web.id
   }
+  # API origin: the public ALB in front of the ECS Fargate API service.
+  # Without this origin + the /api/* behavior below, GET /api/hospitals on the
+  # CloudFront domain falls through to the S3 origin and returns index.html
+  # (200 text/html -> frontend "Server returned a non-JSON response").
+  origin {
+    domain_name = aws_lb.api.dns_name
+    origin_id   = "api"
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
   default_cache_behavior {
     target_origin_id       = "web"
     viewer_protocol_policy = "redirect-to-https"
@@ -184,6 +198,25 @@ resource "aws_cloudfront_distribution" "web" {
     forwarded_values {
       query_string = false
       cookies { forward = "none" }
+    }
+  }
+  # /api/* must bypass S3 and reach the API origin with query strings,
+  # cookies (refresh flow uses credentials:include), and Authorization.
+  # Never cache API responses.
+  ordered_cache_behavior {
+    path_pattern           = "/api/*"
+    target_origin_id       = "api"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods         = ["GET", "HEAD"]
+    compress               = true
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    forwarded_values {
+      query_string = true
+      headers      = ["Authorization", "Content-Type", "Origin", "Accept"]
+      cookies { forward = "all" }
     }
   }
   custom_error_response {
