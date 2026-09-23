@@ -1,0 +1,7 @@
+{
+  "name": "Bangalore Hospital Appointments",
+  "description": "Book appointments with verified hospitals and doctors across Bangalore, India. Real-time IST availability, secure booking, rescheduling and cancellations.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

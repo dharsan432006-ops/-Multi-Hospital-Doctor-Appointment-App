@@ -1,13 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { mockApiPlugin } from './mockApiPlugin.js';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), mockApiPlugin()],
   server: {
-    port: 5173,
-    proxy: {
-      '/api': 'http://localhost:4000',
-    },
+    host: '0.0.0.0',
+    port: 3000,
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 3000,
   },
   build: {
     chunkSizeWarningLimit: 600,
