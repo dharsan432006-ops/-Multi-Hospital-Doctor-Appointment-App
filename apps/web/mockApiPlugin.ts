@@ -2,9 +2,191 @@ import type { Plugin, ViteDevServer, PreviewServer } from 'vite';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { WebSocketServer } from 'ws';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+interface SignalMessage {
+  id: string;
+  roomId: string;
+  senderId: string;
+  senderRole: string;
+  senderName: string;
+  type: string;
+  payload: any;
+  timestamp: number;
+}
+
+interface PeerInfo {
+  ws?: any;
+  peerId: string;
+  role: string;
+  name: string;
+  joinedAt: number;
+}
+
+interface RoomState {
+  roomId: string;
+  peers: Map<string, PeerInfo>;
+  messages: SignalMessage[];
+  chat: { id: string; senderRole: string; senderName: string; text: string; timestamp: number }[];
+}
+
+const teleconsultRooms = new Map<string, RoomState>();
+
+function getOrCreateRoom(roomId: string): RoomState {
+  let room = teleconsultRooms.get(roomId);
+  if (!room) {
+    room = {
+      roomId,
+      peers: new Map(),
+      messages: [],
+      chat: [],
+    };
+    teleconsultRooms.set(roomId, room);
+  }
+  return room;
+}
+
+let teleconsultWss: WebSocketServer | null = null;
+
+function setupTeleconsultWebSocket(httpServer: any) {
+  if (teleconsultWss || !httpServer) return;
+  teleconsultWss = new WebSocketServer({ noServer: true });
+
+  httpServer.on('upgrade', (request: any, socket: any, head: any) => {
+    try {
+      const url = new URL(request.url || '/', 'http://localhost:3000');
+      if (url.pathname === '/ws/teleconsult') {
+        teleconsultWss!.handleUpgrade(request, socket, head, (ws) => {
+          teleconsultWss!.emit('connection', ws, request);
+        });
+      }
+    } catch (err) {
+      console.warn('[Teleconsult] Upgrade error:', err);
+    }
+  });
+
+  teleconsultWss.on('connection', (ws: any, request: any) => {
+    try {
+      const url = new URL(request.url || '/', 'http://localhost:3000');
+      const roomId = url.searchParams.get('roomId') || 'general';
+      const peerId = url.searchParams.get('peerId') || `peer-${Math.random().toString(36).slice(2, 8)}`;
+      const role = url.searchParams.get('role') || 'PATIENT';
+      const name = url.searchParams.get('name') || (role === 'DOCTOR' ? 'Dr. Priya Kapoor' : 'Patient User');
+
+      const room = getOrCreateRoom(roomId);
+      const peerInfo: PeerInfo = { ws, peerId, role, name, joinedAt: Date.now() };
+      room.peers.set(peerId, peerInfo);
+
+      const existingPeers = Array.from(room.peers.values())
+        .filter((p) => p.peerId !== peerId)
+        .map((p) => ({ peerId: p.peerId, role: p.role, name: p.name }));
+
+      // Send initial state to newly joined peer
+      ws.send(JSON.stringify({
+        type: 'room-joined',
+        roomId,
+        peerId,
+        peers: existingPeers,
+        chat: room.chat.slice(-30),
+        timestamp: Date.now(),
+      }));
+
+      // Broadcast peer-joined to all other peers in the room
+      for (const [pId, p] of room.peers.entries()) {
+        if (pId !== peerId && p.ws?.readyState === 1) {
+          p.ws.send(JSON.stringify({
+            type: 'peer-joined',
+            peer: { peerId, role, name },
+            timestamp: Date.now(),
+          }));
+        }
+      }
+
+      ws.on('message', (raw: any) => {
+        try {
+          const msg = JSON.parse(raw.toString());
+          const signal: SignalMessage = {
+            id: `sig-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            roomId,
+            senderId: peerId,
+            senderRole: role,
+            senderName: name,
+            type: msg.type,
+            payload: msg.payload ?? msg,
+            timestamp: Date.now(),
+          };
+
+          room.messages.push(signal);
+          if (room.messages.length > 300) room.messages.shift();
+
+          if (msg.type === 'chat') {
+            room.chat.push({
+              id: `chat-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+              senderRole: role,
+              senderName: name,
+              text: msg.text || msg.payload?.text || '',
+              timestamp: Date.now(),
+            });
+          }
+
+          // Forward to specific target peer or broadcast to others in room
+          const target = msg.targetPeerId || msg.target;
+          for (const [pId, p] of room.peers.entries()) {
+            if (pId !== peerId && p.ws?.readyState === 1) {
+              if (!target || target === pId) {
+                p.ws.send(JSON.stringify(signal));
+              }
+            }
+          }
+        } catch (err) {
+          console.warn('[TeleconsultWS] message parse error:', err);
+        }
+      });
+
+      ws.on('close', () => {
+        room.peers.delete(peerId);
+        for (const [pId, p] of room.peers.entries()) {
+          if (p.ws?.readyState === 1) {
+            p.ws.send(JSON.stringify({
+              type: 'peer-left',
+              peerId,
+              role,
+              name,
+              timestamp: Date.now(),
+            }));
+          }
+        }
+      });
+
+      ws.on('error', (err: any) => {
+        console.warn('[TeleconsultWS] peer error:', err);
+      });
+    } catch (err) {
+      console.warn('[TeleconsultWS] connection error:', err);
+    }
+  });
+}
+
+export function mockApiPlugin(): Plugin {
+  return {
+    name: 'mock-api-server',
+    configureServer(server: ViteDevServer) {
+      if (server.httpServer) {
+        setupTeleconsultWebSocket(server.httpServer);
+      }
+      server.middlewares.use(createMockMiddleware());
+    },
+    configurePreviewServer(server: PreviewServer) {
+      if (server.httpServer) {
+        setupTeleconsultWebSocket(server.httpServer);
+      }
+      server.middlewares.use(createMockMiddleware());
+    },
+  };
+}
 
 interface RawHospital {
   id?: string;
@@ -63,18 +245,6 @@ interface MockNotificationLog {
   provider: string;
   patientName?: string;
   appointmentTime?: string;
-}
-
-export function mockApiPlugin(): Plugin {
-  return {
-    name: 'mock-api-server',
-    configureServer(server: ViteDevServer) {
-      server.middlewares.use(createMockMiddleware());
-    },
-    configurePreviewServer(server: PreviewServer) {
-      server.middlewares.use(createMockMiddleware());
-    },
-  };
 }
 
 function createMockMiddleware() {
