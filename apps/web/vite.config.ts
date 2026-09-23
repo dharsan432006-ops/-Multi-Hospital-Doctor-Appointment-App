@@ -8,6 +8,10 @@ export default defineConfig({
     'import.meta.env.VITE_GOOGLE_MAPS_API_KEY': JSON.stringify(
       process.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyDTfjPBRQWiw1EJLWNS5QfIq9eOvF3KjfU'
     ),
+    'import.meta.env.VITE_API_URL': JSON.stringify('/api'),
+  },
+  optimizeDeps: {
+    include: ['@vis.gl/react-google-maps', '@tanstack/react-query', 'react-router-dom'],
   },
   server: {
     host: '0.0.0.0',

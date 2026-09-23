@@ -1,5 +1,8 @@
 /** Normalize VITE_API_URL: strip trailing slashes so `${BASE}${path}` never doubles them. */
 function normalizeBase(raw: string | undefined): string {
+  if (typeof window !== 'undefined' && raw && raw.includes('localhost:4000')) {
+    return '/api';
+  }
   const v = (raw ?? '/api').trim();
   if (!v) return '/api';
   return v.length > 1 ? v.replace(/\/+$/, '') : v;
