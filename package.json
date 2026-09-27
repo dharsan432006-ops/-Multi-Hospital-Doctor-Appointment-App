@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=apps/web",
-    "build": "npm run build --workspace=apps/web",
+    "build": "npm run build --workspace=apps/web && node -e \"const fs=require('fs'); fs.rmSync('./dist', {recursive:true, force:true}); fs.cpSync('./apps/web/dist', './dist', {recursive:true});\"",
     "dev:api": "npm run dev --workspace=apps/api",
     "dev:web": "npm run dev --workspace=apps/web",
     "seed": "npm run seed --workspace=apps/api",
